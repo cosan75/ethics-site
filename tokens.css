@@ -1,0 +1,66 @@
+/* Hallmark · tokens · theme: custom "De Stijl 교실" (Mondrian composition)
+ * paper oklch(98.5% 0 0) · ink oklch(17% 0.01 265) · accent (blue) oklch(46% 0.19 262)
+ * axes: light / display-heavy / cool
+ */
+:root{
+  /* 색: 흰 바탕 · 검은 선 · 원색 면 (파랑 중심) */
+  --color-paper:    oklch(98.5% 0 0);
+  --color-paper-2:  oklch(95.5% 0.004 260);
+  --color-ink:      oklch(17% 0.01 265);
+  --color-ink-2:    oklch(42% 0.012 265);
+  --color-rule:     oklch(17% 0.01 265);
+  --color-hair:     oklch(88% 0.006 265);
+  --color-accent:   oklch(46% 0.19 262);   /* 몬드리안 파랑 — 가장 사랑받는 색 */
+  --color-accent-2: oklch(93% 0.035 262);
+  --color-on-accent:oklch(98.5% 0 0);
+  --color-red:      oklch(56% 0.21 28);
+  --color-on-red:   oklch(98.5% 0 0);
+  --color-yellow:   oklch(87% 0.17 95);
+  --color-on-yellow:oklch(17% 0.01 265);
+  --color-brand:    oklch(75% 0.17 70);    /* 연구회 엠블럼 주황 */
+  --color-focus:    oklch(56% 0.21 28);
+
+  /* 글꼴 */
+  --font-display: "Black Han Sans", "Noto Sans KR", system-ui, sans-serif;
+  --font-body:    "Noto Sans KR", system-ui, sans-serif;
+
+  /* 4pt 간격 */
+  --space-3xs: 0.25rem; --space-2xs: 0.5rem; --space-xs: 0.75rem;
+  --space-sm: 1rem; --space-md: 1.5rem; --space-lg: 2rem;
+  --space-xl: 3rem; --space-2xl: 4.5rem;
+
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem;
+  --text-xl: 1.625rem; --text-2xl: 2.25rem; --text-display: clamp(2rem, 6vw, 3.75rem);
+
+  --rule-w: 6px;       /* 몬드리안 굵은 선 */
+  --rule-thin: 3px;
+  --radius-pill: 999px;
+  --radius-0: 0;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-short: 160ms;
+  --dur-med: 240ms;
+
+  --bar-h: 64px;
+  --tab-h: 64px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --color-paper: oklch(19% 0.01 265); --color-paper-2: oklch(24% 0.012 265);
+    --color-ink: oklch(96% 0 0); --color-ink-2: oklch(75% 0.01 265);
+    --color-rule: oklch(8% 0.005 265); --color-hair: oklch(32% 0.012 265);
+    --color-accent: oklch(62% 0.17 262); --color-accent-2: oklch(30% 0.07 262); --color-on-accent: oklch(12% 0.01 265);
+    --color-red: oklch(63% 0.19 28); --color-on-red: oklch(12% 0.01 265);
+    --color-yellow: oklch(84% 0.16 95);
+  }
+}
+:root[data-theme="dark"]{
+  --color-paper: oklch(19% 0.01 265); --color-paper-2: oklch(24% 0.012 265);
+  --color-ink: oklch(96% 0 0); --color-ink-2: oklch(75% 0.01 265);
+  --color-rule: oklch(8% 0.005 265); --color-hair: oklch(32% 0.012 265);
+  --color-accent: oklch(62% 0.17 262); --color-accent-2: oklch(30% 0.07 262); --color-on-accent: oklch(12% 0.01 265);
+  --color-red: oklch(63% 0.19 28); --color-on-red: oklch(12% 0.01 265);
+  --color-yellow: oklch(84% 0.16 95);
+}
