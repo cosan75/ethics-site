@@ -1,0 +1,106 @@
+/* Hallmark · layer: design 2 "부드러운 팝아트" over shared structure (style.css)
+ * macrostructure: repeated-print tile grid (Warhol) · texture: ben-day dots (Lichtenstein) · anchor: pastel pink 8 / sky 235
+ * pre-emit critique: P4 H4 E4 S4 R4 V5
+ */
+
+body {
+  background-color: var(--color-paper);
+  background-image: radial-gradient(var(--color-dot) 1.2px, transparent 1.6px);
+  background-size: 16px 16px;
+}
+h1, h2 { letter-spacing: 0; }
+
+/* 파스텔 면: 진한 파랑 대신 하늘색, 글자는 먹색 */
+[data-c="b"] { background: var(--color-sky); color: var(--color-ink); }
+
+/* 망점 무늬 */
+.m-hero, .m-tile, .res-top, .steps li, .quad li, .team, .join, .ph-sq, .proj-img.blank, .dday .d {
+  background-image: radial-gradient(color-mix(in oklch, var(--color-rule) 13%, transparent) 1.3px, transparent 1.7px);
+  background-size: 9px 9px;
+}
+
+/* ---------- 상단바 ---------- */
+.bar { background: var(--color-paper); border-bottom-width: var(--rule-thin); }
+.search, .iconbtn, .field { box-shadow: var(--pop-sm); }
+.search button { background: var(--color-yellow); color: var(--color-on-yellow); }
+.topnav a { border-radius: var(--radius-sm); border-bottom: 0; }
+.topnav a[aria-current="page"] { background: var(--color-red); color: var(--color-on-red); }
+.dpick-menu { border-radius: var(--radius-sm); box-shadow: var(--pop); }
+.dpick-menu a { border-radius: 6px; }
+.sw { border-radius: 50%; }
+
+/* ---------- 홈: 판화 반복 격자 ---------- */
+.mond { background: none; border: 0; gap: var(--space-sm); }
+.mond > * {
+  border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-card);
+  box-shadow: var(--pop); overflow: hidden;
+}
+.m-tile { transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
+.m-tile:hover { filter: none; transform: translate(-2px, -2px); box-shadow: var(--pop-lg); }
+.m-tile:active { transform: translate(2px, 2px); box-shadow: var(--pop-sm); }
+.mond > a:nth-of-type(3) { background-color: var(--color-mint); color: var(--color-ink); }
+.mond > a:nth-of-type(4) { background-color: var(--color-lilac); color: var(--color-ink); }
+.mond > a:nth-of-type(6) { background-color: var(--color-paper-2); color: var(--color-ink); }
+.m-tile[data-c="w"]:hover { background-color: var(--color-paper-2); }
+.m-kicker {
+  align-self: flex-start; padding: var(--space-3xs) var(--space-xs);
+  background: var(--color-paper); color: var(--color-ink);
+  border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-pill);
+  box-shadow: var(--pop-sm); transform: rotate(-2deg);
+}
+.m-hero h1 { color: var(--color-ink); }
+.m-num b { color: var(--color-hot); }
+.m-mark { background-color: var(--color-paper); }
+
+/* ---------- 버튼·칩 ---------- */
+.btn.on-b, .more, .ibtn, .tchip { box-shadow: var(--pop-sm); transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
+.btn.on-b:hover, .more:hover, a.ibtn:hover, .tchip:hover { transform: translate(-1px, -1px); box-shadow: var(--pop); }
+.more:hover, a.ibtn:hover { background: var(--color-yellow); color: var(--color-on-yellow); }
+.chip, .st { border-radius: var(--radius-pill); }
+.tchip[aria-pressed="true"] { background: var(--color-ink); color: var(--color-paper); }
+.tchip[data-c="b"][aria-pressed="true"] { background: var(--color-sky); color: var(--color-ink); }
+.tchip[data-c="r"][aria-pressed="true"] { background: var(--color-red); color: var(--color-on-red); }
+.tchip[data-c="y"][aria-pressed="true"] { background: var(--color-yellow); color: var(--color-on-yellow); }
+.st.on { background: var(--color-red); color: var(--color-on-red); }
+
+/* ---------- 카드 ---------- */
+.res, .proj, .dday, .lessons li, .linkcard, .team, .join, .empty {
+  border-radius: var(--radius-card); box-shadow: var(--pop); overflow: hidden;
+}
+.res[data-c="b"] .res-top { background-color: var(--color-sky); color: var(--color-ink); }
+.linkcard .res-ico { border-radius: var(--radius-sm); }
+.linkcard[data-c="b"] .res-ico { background: var(--color-sky); color: var(--color-ink); }
+.linkcard:hover { background: var(--color-paper-2); }
+.join { border-width: var(--rule-thin); }
+.empty { border-style: solid; border-color: var(--color-hair); box-shadow: none; }
+
+.steps, .quad, .gallery { background: none; border: 0; gap: var(--space-sm); }
+.steps li, .quad li, .gallery figure {
+  border: var(--rule-thin) solid var(--color-rule); border-radius: var(--radius-card); box-shadow: var(--pop); overflow: hidden;
+}
+.quad li[data-c="w"] { background-color: var(--color-mint); }
+.lessons .n, .steps .n, .quad .n { border-radius: 50%; }
+.steps .n, .quad .n { border: 2px solid var(--color-rule); }
+
+.pills li { border-radius: var(--radius-pill); }
+.pills b { border-radius: 50%; }
+.now, .ph-note { color: var(--color-hot); }
+.list .pin, .rk-num .i { color: var(--color-hot); }
+.list .dot { border-radius: 50%; background: var(--color-red); border: 2px solid var(--color-rule); }
+.rk { border-radius: 50%; }
+.rk[data-c="b"] { background: var(--color-sky); color: var(--color-ink); }
+.yr { color: var(--color-accent); }
+
+/* ---------- 머리·탭 ---------- */
+.ph { border-bottom-width: var(--rule-thin); border-bottom-style: dashed; }
+.ph-sq { border-radius: var(--radius-sm); box-shadow: var(--pop-sm); }
+.seg, .tabs { border-radius: var(--radius-pill); overflow: hidden; box-shadow: var(--pop-sm); }
+.seg .fchip[aria-pressed="true"] { background: var(--color-yellow); color: var(--color-on-yellow); }
+.tabs [role="tab"][aria-selected="true"] { background: var(--color-red); color: var(--color-on-red); }
+.about-hero { border-bottom-style: dashed; border-bottom-width: var(--rule-thin); }
+
+/* ---------- 바닥 ---------- */
+.foot { border-top-width: var(--rule-thin); }
+.promise li { box-shadow: var(--pop-sm); background: var(--color-paper); }
+.tabbar { border-top-width: var(--rule-thin); }
+.tabbar a[aria-current="page"] { color: var(--color-hot); }

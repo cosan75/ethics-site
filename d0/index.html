@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>디지털윤리교육연구회</title>
+<meta name="description" content="디지털과 교육, 바른 생각으로 연결하다 — 충남 디지털윤리교육연구회의 디지털 윤리 수업 자료와 활동">
+<link rel="icon" href="../img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Gaegu:wght@700&family=Hahmlet:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>try{localStorage.setItem("dew:design","0")}catch(e){}</script>
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#/" aria-label="디지털윤리교육연구회 홈">
+      <img src="../img/logo.png" alt="" width="40" height="41">
+      <span class="brand-text"><b>디지털윤리교육연구회</b><small lang="en">Digital Ethics Education Research Association</small></span>
+    </a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="#/library">자료실</a>
+      <a href="#/projects">프로젝트</a>
+      <a href="#/learn">연수·배우기</a>
+      <a href="#/notice">공지</a>
+      <a href="#/about">소개</a>
+    </nav>
+    <details class="dpick">
+      <summary aria-label="디자인 고르기" title="디자인 고르기"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-1-.8-1.4-.8-2.3 0-1 .8-1.6 1.8-1.6H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10" cy="7" r="1.2"/><circle cx="15" cy="7.5" r="1.2"/></svg></summary>
+      <div class="dpick-menu">
+        <a href="./" aria-current="true"><span class="sw sw0"></span>디자인 0 · 처음</a>
+        <a href="../d1/"><span class="sw sw1"></span>디자인 1 · 몬드리안</a>
+        <a href="../?d=2"><span class="sw sw2"></span>디자인 2 · 팝아트</a>
+      </div>
+    </details>
+    <button class="theme" type="button" aria-label="화면 밝기 바꾸기" title="화면 밝기 바꾸기">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1"></main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-brand"><img src="../img/logo.png" alt="" width="44" height="45"><div><b>디지털윤리교육연구회</b><span>디지털과 교육, 바른 생각으로 연결하다</span></div></div>
+    <div>
+      <h2 class="foot-title">이 사이트가 지키는 약속</h2>
+      <ul class="promise">
+        <li><b>추적하지 않습니다</b> 방문 분석·광고 쿠키를 쓰지 않습니다.</li>
+        <li><b>모으지 않습니다</b> 회원 가입이 없고, 어떤 개인정보도 받지 않습니다.</li>
+        <li><b>AI 사용을 밝힙니다</b> AI 도움을 받은 글·그림에는 <span class="ai-tag">AI 도움</span> 표시를 붙입니다.</li>
+        <li><b>출처를 밝힙니다</b> 모든 자료에 만든 곳과 연도를 적습니다.</li>
+      </ul>
+    </div>
+    <p class="foot-small" id="foot-small"></p>
+  </div>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+<script>document.querySelectorAll(".dpick a").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();location.href=a.getAttribute("href")+location.hash})})</script>
+</body>
+</html>

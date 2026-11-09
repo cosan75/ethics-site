@@ -2,6 +2,7 @@
   "use strict";
   var S = window.SITE;
   var main = document.getElementById("main");
+  var B = window.BASE || "";
 
   /* ---------- 도구 ---------- */
   function esc(s) {
@@ -55,7 +56,7 @@
       (href ? '<a class="more" href="' + href + '" aria-label="' + esc(title) + ' 전체 보기">전체 ' + ic("i-out") + "</a>" : "") + "</div>";
   }
   function empty(text) {
-    return '<div class="empty"><img src="img/logo.png" alt="" width="36" height="37"><span>' + esc(text) + "</span></div>";
+    return '<div class="empty"><img src="' + B + 'img/logo.png" alt="" width="36" height="37"><span>' + esc(text) + "</span></div>";
   }
   function status(s) {
     var c = s === "진행 중" ? "on" : s === "완료" ? "done" : "";
@@ -108,7 +109,7 @@
     return (
       '<article class="proj">' +
       (p.img
-        ? '<div class="proj-img"><img src="' + esc(p.img) + '" alt="' + esc(p.title) + ' 이미지" loading="lazy"></div>'
+        ? '<div class="proj-img"><img src="' + esc(B + p.img) + '" alt="' + esc(p.title) + ' 이미지" loading="lazy"></div>'
         : '<div class="proj-img blank" data-c="' + t[1] + '">' + ic(t[0]) + "</div>") +
       '<div class="proj-body">' +
       '<div class="chips">' + status(p.status) + '<span class="chip">' + esc(p.period) + "</span></div>" +
@@ -169,7 +170,7 @@
       '<p class="m-kicker">' + esc(S.site.badge) + "</p>" +
       "<h1>" + esc(S.site.slogan) + "</h1>" +
       '<a class="btn on-b" href="#/library">' + ic("i-library") + "수업 자료 보기</a></div>" +
-      '<div class="m-mark"><img src="img/logo.png" alt="디지털윤리교육연구회 엠블럼" width="120" height="123">' +
+      '<div class="m-mark"><img src="' + B + 'img/logo.png" alt="디지털윤리교육연구회 엠블럼" width="120" height="123">' +
       '<span class="m-num"><b>' + esc(String(S.site.members).replace(/\D/g, "")) + '</b>명</span><span class="m-cap">' + esc(S.site.membersNote) + "</span></div>" +
       tile("#/library", "i-library", "자료실", S.resources.length, "r") +
       tile("#/projects", "i-projects", "프로젝트", S.projects.length, "y") +
@@ -261,7 +262,7 @@
       '<div class="grid g2">' + S.projects.map(projectCard).join("") + "</div>" +
       sec("지난 성과", "", "i-trophy") +
       '<div class="gallery">' + withImg.map(function (a) {
-        return '<figure><img src="' + esc(a.img) + '" alt="' + esc(a.title) + ' 표지" loading="lazy"><figcaption><span class="chip">' + esc(a.year) + "</span>" + esc(a.title) + "</figcaption></figure>";
+        return '<figure><img src="' + esc(B + a.img) + '" alt="' + esc(a.title) + ' 표지" loading="lazy"><figcaption><span class="chip">' + esc(a.year) + "</span>" + esc(a.title) + "</figcaption></figure>";
       }).join("") + "</div>" +
       '<div class="years">' + ys.map(function (y) {
         return '<section><h3 class="yr">' + y + "</h3>" +
@@ -329,7 +330,7 @@
     var u = safeUrl(S.site.joinUrl);
     return (
       '<section class="about-hero">' +
-      '<img src="img/logo.png" alt="디지털윤리교육연구회 엠블럼" width="96" height="98">' +
+      '<img src="' + B + 'img/logo.png" alt="디지털윤리교육연구회 엠블럼" width="96" height="98">' +
       "<div><h1>" + esc(S.site.name) + '</h1><p class="en" lang="en">' + esc(S.site.nameEn) + "</p>" +
       '<div class="chips"><span class="chip">' + ic("i-about", "sm") + esc(S.site.members) + '</span><span class="chip">' + ic("i-map", "sm") + S.regions.length + '개 권역</span><span class="chip">' + ic("i-team", "sm") + S.teams.length + "개 팀</span></div></div>" +
       "</section>" +
@@ -388,6 +389,11 @@
   });
 
   document.getElementById("foot-small").textContent = "© " + new Date().getFullYear() + " " + S.site.name;
+
+  /* 디자인 고르기: 지금 보던 쪽 유지 */
+  document.querySelectorAll(".dpick a").forEach(function (l) {
+    l.addEventListener("click", function (e) { e.preventDefault(); location.href = l.getAttribute("href") + location.hash; });
+  });
 
   route();
 })();

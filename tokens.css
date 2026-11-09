@@ -1,41 +1,49 @@
-/* Hallmark · tokens · theme: custom "De Stijl 교실" (Mondrian composition)
- * paper oklch(98.5% 0 0) · ink oklch(17% 0.01 265) · accent (blue) oklch(46% 0.19 262)
- * axes: light / display-heavy / cool
+/* Hallmark · tokens · theme: custom "부드러운 팝아트" (Warhol 반복 판화 + Lichtenstein 망점, 채도 낮춤)
+ * paper oklch(97.5% 0.012 85) · ink oklch(28% 0.03 265) · accent oklch(50% 0.11 255)
+ * axes: light / display-heavy / warm-pastel
  */
 :root{
-  /* 색: 흰 바탕 · 검은 선 · 원색 면 (파랑 중심) */
-  --color-paper:    oklch(98.5% 0 0);
-  --color-paper-2:  oklch(95.5% 0.004 260);
-  --color-ink:      oklch(17% 0.01 265);
-  --color-ink-2:    oklch(42% 0.012 265);
-  --color-rule:     oklch(17% 0.01 265);
-  --color-hair:     oklch(88% 0.006 265);
-  --color-accent:   oklch(46% 0.19 262);   /* 몬드리안 파랑 — 가장 사랑받는 색 */
-  --color-accent-2: oklch(93% 0.035 262);
-  --color-on-accent:oklch(98.5% 0 0);
-  --color-red:      oklch(56% 0.21 28);
-  --color-on-red:   oklch(98.5% 0 0);
-  --color-yellow:   oklch(87% 0.17 95);
-  --color-on-yellow:oklch(17% 0.01 265);
-  --color-brand:    oklch(75% 0.17 70);    /* 연구회 엠블럼 주황 */
-  --color-focus:    oklch(56% 0.21 28);
+  /* 크림 종이 · 남색 먹선 · 파스텔 면 */
+  --color-paper:    oklch(97.5% 0.012 85);
+  --color-paper-2:  oklch(94% 0.02 85);
+  --color-ink:      oklch(28% 0.03 265);
+  --color-ink-2:    oklch(47% 0.025 265);
+  --color-rule:     oklch(28% 0.03 265);
+  --color-hair:     oklch(87% 0.015 85);
+  --color-dot:      oklch(89% 0.022 85);
+  --color-accent:   oklch(50% 0.11 255);
+  --color-accent-2: oklch(90% 0.04 240);
+  --color-on-accent:oklch(98% 0.01 85);
+  --color-sky:      oklch(86% 0.06 235);
+  --color-red:      oklch(85% 0.075 8);    /* 분홍 */
+  --color-on-red:   oklch(28% 0.03 265);
+  --color-yellow:   oklch(91% 0.085 95);   /* 버터 */
+  --color-on-yellow:oklch(28% 0.03 265);
+  --color-mint:     oklch(88% 0.06 165);
+  --color-lilac:    oklch(86% 0.055 300);
+  --color-hot:      oklch(54% 0.14 10);    /* 글자용 진한 분홍 */
+  --color-brand:    oklch(75% 0.17 70);
+  --color-focus:    oklch(50% 0.11 255);
 
-  /* 글꼴 */
-  --font-display: "Black Han Sans", "Noto Sans KR", system-ui, sans-serif;
+  --font-display: "Jua", "Noto Sans KR", system-ui, sans-serif;
   --font-body:    "Noto Sans KR", system-ui, sans-serif;
 
-  /* 4pt 간격 */
   --space-3xs: 0.25rem; --space-2xs: 0.5rem; --space-xs: 0.75rem;
   --space-sm: 1rem; --space-md: 1.5rem; --space-lg: 2rem;
   --space-xl: 3rem; --space-2xl: 4.5rem;
 
   --text-xs: 0.75rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem;
-  --text-xl: 1.625rem; --text-2xl: 2.25rem; --text-display: clamp(2rem, 6vw, 3.75rem);
+  --text-xl: 1.625rem; --text-2xl: 2.25rem; --text-display: clamp(2rem, 6vw, 3.5rem);
 
-  --rule-w: 6px;       /* 몬드리안 굵은 선 */
+  --rule-w: 3px;
   --rule-thin: 3px;
   --radius-pill: 999px;
   --radius-0: 0;
+  --radius-card: 18px;
+  --radius-sm: 10px;
+  --pop: 4px 4px 0 var(--color-rule);
+  --pop-lg: 6px 6px 0 var(--color-rule);
+  --pop-sm: 2px 2px 0 var(--color-rule);
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
@@ -43,24 +51,32 @@
   --dur-short: 160ms;
   --dur-med: 240ms;
 
+  --swatch-0: oklch(75% 0.17 70);
+  --swatch-1: oklch(46% 0.19 262);
+  --swatch-2: oklch(85% 0.075 8);
+
   --bar-h: 64px;
   --tab-h: 64px;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --color-paper: oklch(19% 0.01 265); --color-paper-2: oklch(24% 0.012 265);
-    --color-ink: oklch(96% 0 0); --color-ink-2: oklch(75% 0.01 265);
-    --color-rule: oklch(8% 0.005 265); --color-hair: oklch(32% 0.012 265);
-    --color-accent: oklch(62% 0.17 262); --color-accent-2: oklch(30% 0.07 262); --color-on-accent: oklch(12% 0.01 265);
-    --color-red: oklch(63% 0.19 28); --color-on-red: oklch(12% 0.01 265);
-    --color-yellow: oklch(84% 0.16 95);
+    --color-paper: oklch(23% 0.02 265); --color-paper-2: oklch(28% 0.022 265);
+    --color-ink: oklch(95% 0.012 85); --color-ink-2: oklch(76% 0.015 85);
+    --color-rule: oklch(12% 0.01 265); --color-hair: oklch(34% 0.02 265); --color-dot: oklch(27% 0.02 265);
+    --color-accent: oklch(72% 0.09 245); --color-on-accent: oklch(20% 0.02 265);
+    --color-sky: oklch(44% 0.06 235); --color-red: oklch(46% 0.07 8); --color-yellow: oklch(52% 0.07 95);
+    --color-mint: oklch(45% 0.05 165); --color-lilac: oklch(43% 0.05 300);
+    --color-on-red: oklch(96% 0.01 85); --color-on-yellow: oklch(96% 0.01 85);
+    --color-hot: oklch(76% 0.11 10);
   }
 }
 :root[data-theme="dark"]{
-  --color-paper: oklch(19% 0.01 265); --color-paper-2: oklch(24% 0.012 265);
-  --color-ink: oklch(96% 0 0); --color-ink-2: oklch(75% 0.01 265);
-  --color-rule: oklch(8% 0.005 265); --color-hair: oklch(32% 0.012 265);
-  --color-accent: oklch(62% 0.17 262); --color-accent-2: oklch(30% 0.07 262); --color-on-accent: oklch(12% 0.01 265);
-  --color-red: oklch(63% 0.19 28); --color-on-red: oklch(12% 0.01 265);
-  --color-yellow: oklch(84% 0.16 95);
+  --color-paper: oklch(23% 0.02 265); --color-paper-2: oklch(28% 0.022 265);
+  --color-ink: oklch(95% 0.012 85); --color-ink-2: oklch(76% 0.015 85);
+  --color-rule: oklch(12% 0.01 265); --color-hair: oklch(34% 0.02 265); --color-dot: oklch(27% 0.02 265);
+  --color-accent: oklch(72% 0.09 245); --color-on-accent: oklch(20% 0.02 265);
+  --color-sky: oklch(44% 0.06 235); --color-red: oklch(46% 0.07 8); --color-yellow: oklch(52% 0.07 95);
+  --color-mint: oklch(45% 0.05 165); --color-lilac: oklch(43% 0.05 300);
+  --color-on-red: oklch(96% 0.01 85); --color-on-yellow: oklch(96% 0.01 85);
+  --color-hot: oklch(76% 0.11 10);
 }
