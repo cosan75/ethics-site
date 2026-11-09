@@ -1,0 +1,83 @@
+/* Hallmark · tokens · theme: custom "조용한 팝아트" (Julian Opie식 가는 외곽선 · 평면 색 · 넓은 여백)
+ * paper oklch(98.5% 0.006 85) · ink oklch(32% 0.02 265) · accent oklch(52% 0.09 250)
+ * axes: light / quiet / soft-pastel
+ */
+:root{
+  --color-paper:    oklch(98.5% 0.006 85);
+  --color-paper-2:  oklch(95.5% 0.01 85);
+  --color-ink:      oklch(32% 0.02 265);
+  --color-ink-2:    oklch(50% 0.02 265);
+  --color-rule:     oklch(32% 0.02 265);
+  --color-hair:     oklch(90% 0.01 85);
+  --color-dot:      oklch(98.5% 0.006 85);
+  --color-accent:   oklch(52% 0.09 250);
+  --color-accent-2: oklch(93% 0.03 240);
+  --color-on-accent:oklch(98.5% 0.006 85);
+  --color-sky:      oklch(90% 0.035 235);
+  --color-red:      oklch(90% 0.04 15);
+  --color-on-red:   oklch(32% 0.02 265);
+  --color-yellow:   oklch(94% 0.055 95);
+  --color-on-yellow:oklch(32% 0.02 265);
+  --color-mint:     oklch(91% 0.035 165);
+  --color-lilac:    oklch(90% 0.03 300);
+  --color-hot:      oklch(55% 0.11 15);
+  --color-brand:    oklch(75% 0.17 70);
+  --color-focus:    oklch(52% 0.09 250);
+  --color-lift:     oklch(32% 0.02 265 / 0.35);
+
+  --font-display: "Gowun Dodum", "Noto Sans KR", system-ui, sans-serif;
+  --font-body:    "Noto Sans KR", system-ui, sans-serif;
+
+  --space-3xs: 0.25rem; --space-2xs: 0.5rem; --space-xs: 0.75rem;
+  --space-sm: 1rem; --space-md: 1.5rem; --space-lg: 2rem;
+  --space-xl: 3rem; --space-2xl: 4.5rem;
+
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem;
+  --text-xl: 1.5rem; --text-2xl: 2rem; --text-display: clamp(1.875rem, 5vw, 3rem);
+
+  --rule-w: 1.5px;
+  --rule-thin: 1.5px;
+  --radius-pill: 999px;
+  --radius-0: 0;
+  --radius-card: 20px;
+  --radius-sm: 12px;
+  --pop: none;
+  --pop-sm: none;
+  --pop-lg: 0 10px 24px -14px var(--color-lift);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-short: 160ms;
+  --dur-med: 240ms;
+
+  --swatch-0: oklch(75% 0.17 70);
+  --swatch-1: oklch(46% 0.19 262);
+  --swatch-2: oklch(85% 0.075 8);
+  --swatch-3: oklch(90% 0.035 165);
+
+  --bar-h: 64px;
+  --tab-h: 64px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --color-paper: oklch(22% 0.015 265); --color-paper-2: oklch(26% 0.017 265); --color-dot: oklch(22% 0.015 265);
+    --color-ink: oklch(94% 0.01 85); --color-ink-2: oklch(76% 0.012 85);
+    --color-rule: oklch(70% 0.015 265); --color-hair: oklch(32% 0.015 265);
+    --color-accent: oklch(74% 0.08 245); --color-on-accent: oklch(20% 0.02 265);
+    --color-sky: oklch(36% 0.04 235); --color-red: oklch(37% 0.045 15); --color-yellow: oklch(42% 0.05 95);
+    --color-mint: oklch(37% 0.035 165); --color-lilac: oklch(35% 0.035 300);
+    --color-on-red: oklch(95% 0.01 85); --color-on-yellow: oklch(95% 0.01 85);
+    --color-hot: oklch(78% 0.1 15); --color-lift: oklch(5% 0 0 / 0.6);
+  }
+}
+:root[data-theme="dark"]{
+  --color-paper: oklch(22% 0.015 265); --color-paper-2: oklch(26% 0.017 265); --color-dot: oklch(22% 0.015 265);
+  --color-ink: oklch(94% 0.01 85); --color-ink-2: oklch(76% 0.012 85);
+  --color-rule: oklch(70% 0.015 265); --color-hair: oklch(32% 0.015 265);
+  --color-accent: oklch(74% 0.08 245); --color-on-accent: oklch(20% 0.02 265);
+  --color-sky: oklch(36% 0.04 235); --color-red: oklch(37% 0.045 15); --color-yellow: oklch(42% 0.05 95);
+  --color-mint: oklch(37% 0.035 165); --color-lilac: oklch(35% 0.035 300);
+  --color-on-red: oklch(95% 0.01 85); --color-on-yellow: oklch(95% 0.01 85);
+  --color-hot: oklch(78% 0.1 15); --color-lift: oklch(5% 0 0 / 0.6);
+}

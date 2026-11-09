@@ -1,0 +1,35 @@
+/* Hallmark · layer: design 3 "조용한 팝아트" over style.css + pop.css
+ * tone: Julian Opie식 가는 외곽선 · 평면 색 · 망점 없음 · 그림자는 마우스를 올릴 때만
+ * pre-emit critique: P4 H4 E4 S4 R5 V4
+ */
+
+body { background-image: none; line-height: 1.7; }
+h1, h2 { font-weight: 400; }
+
+/* 망점 끄기 */
+.m-hero, .m-tile, .res-top, .steps li, .quad li, .team, .join, .ph-sq, .proj-img.blank, .dday .d { background-image: none; }
+
+/* 굵은 선 → 가는 선 */
+.chip, .st, .ibtn, .tchip, .pills li, .rk, .sw, .steps .n, .quad .n, .linkcard .res-ico, .ways li, .promise li, .list .dot {
+  border-width: var(--rule-thin);
+}
+.seg .fchip, .tabs [role="tab"] { border-right-width: var(--rule-thin); }
+.ph, .about-hero { border-bottom: var(--rule-thin) solid var(--color-hair); }
+.bar { border-bottom: var(--rule-thin) solid var(--color-hair); }
+.foot, .tabbar { border-top: var(--rule-thin) solid var(--color-hair); }
+.list { border-top-width: var(--rule-thin); }
+
+/* 여백을 넉넉히 */
+.mond { gap: var(--space-md); }
+.m-hero { gap: var(--space-lg); }
+.m-kicker { transform: none; border-color: var(--color-hair); }
+.m-tile:hover, .btn.on-b:hover, .more:hover, a.ibtn:hover, .tchip:hover { transform: translateY(-2px); }
+.m-tile:active { transform: none; }
+.more:hover, a.ibtn:hover { background: var(--color-paper-2); color: var(--color-ink); }
+.search button { background: var(--color-paper-2); color: var(--color-ink); }
+.topnav a[aria-current="page"] { background: var(--color-paper-2); color: var(--color-ink); box-shadow: inset 0 -3px 0 var(--color-hot); }
+.tabs [role="tab"][aria-selected="true"], .seg .fchip[aria-pressed="true"] { background: var(--color-ink); color: var(--color-paper); }
+.list .dot { width: 8px; height: 8px; }
+.res-top { border-bottom-color: var(--color-hair); }
+.proj-img { border-color: var(--color-hair); }
+.gallery img { border-bottom-color: var(--color-hair); }
