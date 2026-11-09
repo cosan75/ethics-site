@@ -88,7 +88,7 @@ window.SITE = {
     {
       title: "팩트를 찾아라!",
       sub: "생성형 AI 정보를 ‘수평적 읽기’로 확인하고 출처를 밝혀 나누기",
-      org: "한국과학창의재단 2026 AI·융합교육 교사연구회",
+      org: "한국과학창의재단 2026 AI·융합교육 교사연구회", img: "img/biz/aistem.jpg",
       topic: "AI 윤리", status: "진행 중", period: "2026. 6. ~ 2027. 1.",
       goal: "초등 5~6학년 국어·도덕·실과 융합 8차시. 생성형 AI 검색 결과를 그대로 옮기지 않고, 다른 믿을 만한 곳에서 확인한 뒤 출처를 밝혀 나누는 수업",
       steps: [
@@ -101,12 +101,12 @@ window.SITE = {
     },
     {
       title: "디지털 미디어 문해교육 자료 개발",
-      org: "시청자미디어재단 2026 디지털 미디어 문해교육 교사연구회",
+      org: "시청자미디어재단 2026 디지털 미디어 문해교육 교사연구회", img: "img/biz/media.jpg",
       topic: "미디어 리터러시", status: "진행 중", period: "2026"
     },
     {
       title: "MBL 센서 연계 AISW 교육자료",
-      org: "교사학습공동체(MSG) 연계 · 과학 STEAM",
+      org: "교사학습공동체(MSG) 연계 · 과학 STEAM", img: "img/biz/mbl.jpg",
       topic: "AI 윤리", status: "진행 중", period: "2026",
       goal: "코더블 MBL 센서를 활용한 데이터 기반 과학 탐구 PPT·학습지 (예: 이산화탄소 센서로 연소 후 생기는 물질 확인하기)"
     },
@@ -133,10 +133,10 @@ window.SITE = {
   /* 지난 성과 */
   achievements: [
     { year: 2026, title: "학교 밖 교사 전문적 학습공동체 선정", desc: "전신인 ‘AIDL 학습공동체’ 우수 사례에 이어 디지털윤리교육연구회 이름으로 선정" },
-    { year: 2025, title: "‘세계 속 디지털 시민’ 교과서 집필", desc: "충남교육청 인정도서, 학교자율시간 32차시. 충남 최초 교사 주도 인정도서" },
-    { year: 2025, title: "디지털 윤리 수업안 12종 개발", desc: "서산교육지원청 연계. 저학년·고학년 각 6종 PPT와 학습지 (자료실에 모두 있음)" },
-    { year: 2025, title: "‘자꾸자꾸 플래너’ 개발", desc: "디지털 자기조절력과 자기주도적 학습 습관을 기르는 플래너" },
-    { year: 2025, title: "‘어휘랑 나랑 사고도구어 일력 365’ 제작", desc: "충남 온생각 사고도구어와 연계, 매일 익히며 문해력 높이기" },
+    { year: 2025, title: "‘세계 속 디지털 시민’ 교과서 집필", img: "img/biz/textbook.jpg", desc: "충남교육청 인정도서, 학교자율시간 32차시. 충남 최초 교사 주도 인정도서" },
+    { year: 2025, title: "디지털 윤리 수업안 12종 개발", img: "img/biz/deepfake.jpg", desc: "서산교육지원청 연계. 저학년·고학년 각 6종 PPT와 학습지 (자료실에 모두 있음)" },
+    { year: 2025, title: "‘자꾸자꾸 플래너’ 개발", img: "img/biz/planner.jpg", desc: "디지털 자기조절력과 자기주도적 학습 습관을 기르는 플래너" },
+    { year: 2025, title: "‘어휘랑 나랑 사고도구어 일력 365’ 제작", img: "img/biz/ilryeok.jpg", desc: "충남 온생각 사고도구어와 연계, 매일 익히며 문해력 높이기" },
     { year: 2025, title: "서산 AI교육 한마당 부스 운영", desc: "AI 윤리 부스 4개: 윤리 톡톡 스토리북, AI 숏폼 영상, AI 싱어송라이터, AI 버추얼 셀프 스튜디오" },
     { year: 2025, title: "충청남도교육청 마이크로러닝 연수 선정", desc: "회원들과 함께 마이크로러닝 공모전 참여" },
     { year: 2025, title: "교육활동 침해 예방 영상 제작 참여", desc: "SNS를 통한 교사 정보 공유 문제를 다룬 도교육청 예방 영상" },
@@ -148,6 +148,33 @@ window.SITE = {
     { title: "‘팩트를 찾아라!’ 공개수업 및 참관 교사 협의회", date: "", when: "2026년 2학기 · 날짜는 공지로 안내", kind: "공개수업", place: "연구회원 학교" },
     { title: "2학기 연수: 온생각 활용법", date: "2025-11-13", kind: "정기 연수", place: "", recap: "2학기 정기 모임과 함께 진행" }
   ],
+
+  /* 도름스(dorms.school) 앱·자료 랭킹 TOP 10 — '받은 도름(좋아요)' 순, 2026-11-10 조사.
+     도름스는 조회수를 공개하지 않아 '도름' 수를 인기 지표로 씀. comments = 댓글 수 */
+  dormsTop: {
+    checked: "2026-11-10",
+    total: 961,
+    source: "https://dorms.school/apps?rank=1",
+    items: [
+      { title: "수시지원상담카드 수합앱", by: "보드라운고슴도치", cat: "진로·입시", dorm: 312, comments: 67, desc: "학생 수시 상담카드를 실시간으로 모으고 상담·변경까지", url: "https://dorms.school/apps/d851406e-d292-434c-bb25-7109922541d1" },
+      { title: "모두의 면접 준비기 pro", by: "보드라운고슴도치", cat: "진로·입시", dorm: 260, comments: 80, desc: "생기부 분석 결과를 대입 면접 준비로 잇는 도구", url: "https://dorms.school/apps/7873d600-05e8-4ed6-9015-8657cdb1a6d3" },
+      { title: "생기부 분석기 pro", by: "보드라운고슴도치", cat: "생활기록부", dorm: 168, comments: 67, desc: "생기부 분석기의 인터랙티브 설명서", url: "https://dorms.school/apps/85d1481d-3e11-47f9-ac10-b9251c730b35" },
+      { title: "수시지원상담카드 수합앱 (전문대 포함)", by: "보드라운고슴도치", cat: "진로·입시", dorm: 129, comments: 33, desc: "1위 앱에 전문대 카드까지 더한 버전", url: "https://dorms.school/apps/02b39569-a622-40d5-9d58-3b51353a32e3" },
+      { title: "입사관 시점 생기부 평가기", by: "보드라운고슴도치", cat: "생활기록부", dorm: 99, comments: 14, desc: "대학 서류평가 관점으로 생기부를 살펴보기", url: "https://dorms.school/apps/44cae67a-13a1-4566-94e8-d8eb6d0f2edd" },
+      { title: "정시 2021~2026 입결 뷰어", by: "보드라운고슴도치", cat: "진로·입시", dorm: 81, comments: 15, desc: "공개 입결 자료를 보기 편하게 정리", url: "https://dorms.school/apps/bfe0f887-994e-4e5e-b63e-c6aad86d1d0a" },
+      { title: "이음오피스", by: "듀이언", cat: "업무", dorm: 70, comments: 42, desc: "한컴·MS오피스·PDF·마인드맵을 한 창에서 편집", url: "https://dorms.school/apps/a123f5ca-732e-402c-9a7a-c4f63bccd833" },
+      { title: "9월 원서상담 루틴", by: "보드라운고슴도치", cat: "진로·입시 · 자료", dorm: 70, comments: 6, desc: "고3 담임의 입결 읽기와 원서 배치 판단 틀", url: "https://dorms.school/apps/ed107e08-6ebe-4d6a-a594-242866a20bfb" },
+      { title: "쌤핀(ssampin)", by: "듀이언", cat: "학급경영", dorm: 63, comments: 12, desc: "학급·수업·업무를 한 화면에서 관리하는 대시보드", url: "https://dorms.school/apps/a4fa757c-7d74-45dd-802d-193a3365e02d" },
+      { title: "살아있는 생기부 - 갈피 AI", by: "홍창욱", cat: "생활기록부", dorm: 57, comments: 37, desc: "줄글 생기부를 사람과 AI가 읽기 좋게 재구성", url: "https://dorms.school/apps/8cab0b6c-35f9-4bd9-83d2-b5c6625084df" }
+    ],
+    /* 순위에서 읽은 점 → 우리 사이트에 가져온 것 */
+    lessons: [
+      { see: "10개 중 9개가 생기부·입시 상담처럼 교사 업무 시간을 줄여 주는 실무 도구", take: "자료 카드에 ‘몇 차시·무엇이 들어 있는지’를 먼저 보여 줘 바로 쓸 수 있게 함" },
+      { see: "한 선생님이 같은 도구를 버전업하며 시리즈로 키움 (TOP 10 중 7개가 한 사람)", take: "프로젝트를 해마다 이어 붙이고, 자료에 연도를 표시해 최신판을 알 수 있게 함" },
+      { see: "앱 자체 대신 ‘설명서’만 올려도 3위 — 쓰는 법을 친절히 알려 주는 글이 인기", take: "연수·배우기 ‘시작하기’에 PPT·학습지·과정안 쓰는 순서를 안내" },
+      { see: "도름(좋아요)·댓글 수가 곧 순위 — 반응이 쌓이는 구조", take: "②단계 회원 기능에서 ‘도움됐어요’와 활용 후기를 붙여 우리 자료 순위를 만들 예정" }
+    ]
+  },
 
   /* 배우기 > 시작하기 */
   start: [

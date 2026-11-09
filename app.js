@@ -37,6 +37,52 @@
   }
 
   /* ---------- 조각 ---------- */
+  var MARK = "img/logo.png";
+  function head(title, lead) {
+    return (
+      '<header class="ph"><img class="ph-mark" src="' + MARK + '" alt="" width="56" height="58">' +
+      "<div><h1>" + esc(title) + "</h1>" + (lead ? '<p class="lead">' + esc(lead) + "</p>" : "") + "</div></header>"
+    );
+  }
+  function empty(text) {
+    return '<div class="empty"><img src="' + MARK + '" alt="" width="40" height="41"><span>' + esc(text) + "</span></div>";
+  }
+
+  /* 사업 이미지 카드 (프로젝트·성과 공통) */
+  function bizCard(x) {
+    var tag = x.status ? statusTag(x.status) : '<span class="tag">' + esc(x.year) + "년</span>";
+    return (
+      '<figure class="biz">' +
+      '<div class="biz-img"><img src="' + esc(x.img) + '" alt="' + esc(x.title) + ' 표지 이미지" loading="lazy"></div>' +
+      "<figcaption>" + tag +
+      "<b>" + esc(x.title) + "</b>" +
+      '<span class="muted">' + esc(x.org || x.desc || "") + "</span></figcaption></figure>"
+    );
+  }
+  function bizItems() {
+    return S.projects.filter(function (p) { return p.img; })
+      .concat(S.achievements.filter(function (a) { return a.img; }));
+  }
+
+  /* 도름스 인기 순위 */
+  function rankList(items, max) {
+    var top = items[0] ? items[0].dorm : 1;
+    return (
+      '<ol class="rank">' +
+      items.map(function (it, i) {
+        return (
+          '<li><span class="rk' + (i < 3 ? " hi" : "") + '">' + (i + 1) + "</span>" +
+          '<a class="rk-body" href="' + esc(safeUrl(it.url) || "#") + '"' + ext(it.url) + ">" +
+          "<b>" + esc(it.title) + ' <span aria-hidden="true">↗</span></b>' +
+          '<span class="muted">' + esc(it.desc) + "</span>" +
+          '<span class="rk-meta"><span class="tag">' + esc(it.cat) + "</span> @" + esc(it.by) + "</span></a>" +
+          '<span class="rk-num"><b>' + it.dorm + '</b><small>도름</small><span class="bar" style="width:' + Math.round(it.dorm / top * 100) + '%"></span></span>' +
+          "</li>"
+        );
+      }).slice(0, max || items.length).join("") +
+      "</ol>"
+    );
+  }
   function heroProject(p) {
     return (
       '<article class="task">' +
@@ -52,7 +98,8 @@
 
   function projectCard(p) {
     return (
-      '<article class="card">' +
+      '<article class="card' + (p.img ? " has-img" : "") + '">' +
+      (p.img ? '<div class="pc-img"><img src="' + esc(p.img) + '" alt="' + esc(p.title) + ' 이미지" loading="lazy"></div>' : "") +
       '<div class="meta top">' + statusTag(p.status) + '<span class="tag topic">' + esc(p.topic) + '</span><span class="tag">' + esc(p.period) + "</span></div>" +
       "<h3>" + esc(p.title) + "</h3>" +
       '<span class="org">' + esc(p.org) + "</span>" +
@@ -146,12 +193,17 @@
       "</div>" +
       (cur ? heroProject(cur) : "") +
       "</section>" +
-      '<div class="row"><h2>바로 쓰는 수업 자료</h2><a class="more" href="#/library">자료실 전체 →</a></div>' +
+      '<div class="row"><h2 class="mk">연구회 사업 한눈에</h2><a class="more" href="#/projects">프로젝트 전체 →</a></div>' +
+      '<div class="biz-strip">' + bizItems().map(bizCard).join("") + "</div>" +
+      '<div class="row"><h2 class="mk">바로 쓰는 수업 자료</h2><a class="more" href="#/library">자료실 전체 →</a></div>' +
       '<div class="grid g4">' + pick.map(resCard).join("") + "</div>" +
+      '<div class="row"><h2 class="mk">교사들이 많이 찾은 자료 TOP 10</h2><a class="more" href="#/learn/top">순위 전체 →</a></div>' +
+      '<div class="card top-teaser"><p class="muted" style="margin:0 0 8px;font-size:14px">교사 커뮤니티 도름스(dorms.school) 앱·자료 ' + S.dormsTop.total + "개 가운데 ‘도름(좋아요)’을 가장 많이 받은 순서 · " + esc(S.dormsTop.checked) + " 기준</p>" +
+      rankList(S.dormsTop.items, 3) + "</div>" +
       '<div class="grid g2" style="margin-top:8px">' +
       "<section>" +
       '<div class="row"><h2>다가오는 일정</h2><a class="more" href="#/learn/schedule">일정 전체 →</a></div>' +
-      '<div class="grid">' + (up.length ? up.map(ddayCard).join("") : '<div class="empty">예정된 일정이 없습니다.</div>') + "</div>" +
+      '<div class="grid">' + (up.length ? up.map(ddayCard).join("") : empty("예정된 일정이 없습니다.")) + "</div>" +
       "</section>" +
       "<section>" +
       '<div class="row"><h2>공지</h2><a class="more" href="#/notice">전체 →</a></div>' +
@@ -171,8 +223,7 @@
         })).join("");
     }
     return (
-      "<h1>자료실</h1>" +
-      '<p class="lead">연구회가 서산교육지원청과 함께 만든 디지털 윤리 수업 자료입니다. 수업 PPT는 사본을 만들어 우리 반에 맞게 고쳐 쓰세요.</p>' +
+      head("자료실", "연구회가 서산교육지원청과 함께 만든 디지털 윤리 수업 자료입니다. 수업 PPT는 사본을 만들어 우리 반에 맞게 고쳐 쓰세요.") +
       '<div class="filters">' +
       '<label for="q" class="vh">자료 검색</label>' +
       '<input id="q" class="search" type="search" placeholder="제목·성취기준으로 찾기 (예: 딥페이크, 6도)" value="' + esc(filt.q) + '">' +
@@ -193,7 +244,7 @@
     document.getElementById("count").textContent = "자료 " + arr.length + "개";
     document.getElementById("reslist").innerHTML = arr.length
       ? arr.map(resCard).join("")
-      : '<div class="empty" style="grid-column:1/-1">조건에 맞는 자료가 아직 없습니다. 필터를 줄여 보세요.</div>';
+      : '<div style="grid-column:1/-1">' + empty("조건에 맞는 자료가 아직 없습니다. 필터를 줄여 보세요.") + "</div>";
   }
   function bindLibrary() {
     var q = document.getElementById("q");
@@ -216,10 +267,10 @@
     S.achievements.forEach(function (a) { (years[a.year] = years[a.year] || []).push(a); });
     var ys = Object.keys(years).sort(function (a, b) { return b - a; });
     return (
-      "<h1>프로젝트</h1>" +
-      '<p class="lead">2026년 연구회가 하고 있는 연구와 사업, 그리고 지난 성과입니다.</p>' +
+      head("프로젝트", "2026년 연구회가 하고 있는 연구와 사업, 그리고 지난 성과입니다.") +
       '<div class="grid g2">' + S.projects.map(projectCard).join("") + "</div>" +
-      '<div class="row"><h2>지난 성과</h2></div>' +
+      '<div class="row"><h2 class="mk">지난 성과</h2></div>' +
+      '<div class="biz-grid">' + S.achievements.filter(function (a) { return a.img; }).map(bizCard).join("") + "</div>" +
       ys.map(function (y) {
         return '<h3 class="yr">' + y + "년</h3>" +
           list(years[y].map(function (a) { return { when: a.year, title: a.title, body: a.desc }; }));
@@ -228,7 +279,7 @@
   };
 
   /* 연수·배우기 */
-  var learnTabs = [["start", "시작하기"], ["schedule", "연수·모임"], ["links", "꿀 링크"]];
+  var learnTabs = [["start", "시작하기"], ["schedule", "연수·모임"], ["top", "인기 TOP 10"], ["links", "꿀 링크"]];
   views["learn"] = function (sub) {
     var cur = learnTabs.some(function (t) { return t[0] === sub; }) ? sub : "start";
     var body = "";
@@ -241,19 +292,28 @@
       body =
         '<p class="muted">' + S.ways.map(esc).join(" · ") + "</p>" +
         "<h2>다가오는 일정</h2>" +
-        '<div class="grid g2">' + (up.length ? up.map(ddayCard).join("") : '<div class="empty">예정된 일정이 없습니다.</div>') + "</div>" +
+        '<div class="grid g2">' + (up.length ? up.map(ddayCard).join("") : empty("예정된 일정이 없습니다.")) + "</div>" +
         '<h2 style="margin-top:32px">지난 연수 돌아보기</h2>' +
         (ps.length ? list(ps.map(function (t) {
           return { when: t.date.replace(/-/g, "."), title: t.title, body: [t.recap, t.place].filter(Boolean).join(" · ") };
-        })) : '<div class="empty">아직 지난 연수가 없습니다.</div>');
+        })) : empty("아직 지난 연수가 없습니다."));
+    } else if (cur === "top") {
+      var T = S.dormsTop;
+      body =
+        '<p class="muted">교사 커뮤니티 <a href="' + esc(T.source) + '" target="_blank" rel="noopener noreferrer">도름스(dorms.school)</a> 앱·자료 ' + T.total +
+        "개 가운데 ‘도름(좋아요)’을 가장 많이 받은 10개입니다. 도름스는 조회수를 공개하지 않아 도름 수를 인기 지표로 썼습니다. (" + esc(T.checked) + " 기준)</p>" +
+        rankList(T.items) +
+        '<h2 class="mk" style="margin-top:32px">순위에서 배운 점, 우리 사이트에 가져온 것</h2>' +
+        '<div class="lessons">' + T.lessons.map(function (l, i) {
+          return '<div class="lesson"><span class="ln">' + (i + 1) + '</span><div><p class="see">' + esc(l.see) + '</p><p class="take">→ ' + esc(l.take) + "</p></div></div>";
+        }).join("") + "</div>";
     } else {
       body = '<div class="grid g3">' + S.links.map(function (l) {
         return '<a class="card" href="' + esc(safeUrl(l.url) || "#") + '"' + ext(l.url) + '><span class="tag topic" style="align-self:flex-start">' + esc(l.cat) + "</span><h3>" + esc(l.title) + ' ↗</h3><span class="muted" style="font-size:15px">' + esc(l.desc) + "</span></a>";
       }).join("") + "</div>";
     }
     return (
-      "<h1>연수·배우기</h1>" +
-      '<p class="lead">디지털 윤리 수업이 처음인 선생님부터 연구회 정기 연수까지.</p>' +
+      head("연수·배우기", "디지털 윤리 수업이 처음인 선생님부터 연구회 정기 연수까지.") +
       '<div class="tabs" role="tablist">' + learnTabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === cur) + '">' + t[1] + "</button>";
       }).join("") + "</div>" +
@@ -269,7 +329,7 @@
   /* 공지 */
   views["notice"] = function () {
     var arr = S.notices.filter(function (n) { return n.pin; }).concat(S.notices.filter(function (n) { return !n.pin; }));
-    return "<h1>공지</h1>" + '<p class="lead">연구회 소식과 모집 안내입니다.</p>' + list(arr);
+    return head("공지", "연구회 소식과 모집 안내입니다.") + list(arr);
   };
 
   /* 소개 */
