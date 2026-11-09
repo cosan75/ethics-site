@@ -38,9 +38,20 @@
 
   /* ---------- 조각 ---------- */
   var MARK = "img/logo.png";
-  function head(title, lead) {
+  /* 페이지별 아이콘 (선 아이콘, 직접 그림) */
+  var ICONS = {
+    library: '<path d="M2 5.5C4.5 4 7.5 4 12 6.5c4.5-2.5 7.5-2.5 10-1v13c-2.5-1.5-5.5-1.5-10 1-4.5-2.5-7.5-2.5-10-1z"/><path d="M12 6.5v13"/>',
+    projects: '<path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/><circle cx="18.5" cy="18.5" r="2.5"/>',
+    learn: '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.2V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.8"/><path d="M22 9v6"/>',
+    notice: '<path d="M3 10v4h3l7 5V5L6 10z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19.5 6a8.5 8.5 0 0 1 0 12"/>',
+    about: '<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 14.2c3 .2 5 2.6 5 5.8"/>'
+  };
+  function icon(name) {
+    return '<span class="ph-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + ICONS[name] + "</svg></span>";
+  }
+  function head(title, lead, ico) {
     return (
-      '<header class="ph"><img class="ph-mark" src="' + MARK + '" alt="" width="56" height="58">' +
+      '<header class="ph">' + icon(ico) +
       "<div><h1>" + esc(title) + "</h1>" + (lead ? '<p class="lead">' + esc(lead) + "</p>" : "") + "</div></header>"
     );
   }
@@ -223,7 +234,7 @@
         })).join("");
     }
     return (
-      head("자료실", "연구회가 서산교육지원청과 함께 만든 디지털 윤리 수업 자료입니다. 수업 PPT는 사본을 만들어 우리 반에 맞게 고쳐 쓰세요.") +
+      head("자료실", "연구회가 서산교육지원청과 함께 만든 디지털 윤리 수업 자료입니다. 수업 PPT는 사본을 만들어 우리 반에 맞게 고쳐 쓰세요.", "library") +
       '<div class="filters">' +
       '<label for="q" class="vh">자료 검색</label>' +
       '<input id="q" class="search" type="search" placeholder="제목·성취기준으로 찾기 (예: 딥페이크, 6도)" value="' + esc(filt.q) + '">' +
@@ -267,7 +278,7 @@
     S.achievements.forEach(function (a) { (years[a.year] = years[a.year] || []).push(a); });
     var ys = Object.keys(years).sort(function (a, b) { return b - a; });
     return (
-      head("프로젝트", "2026년 연구회가 하고 있는 연구와 사업, 그리고 지난 성과입니다.") +
+      head("프로젝트", "2026년 연구회가 하고 있는 연구와 사업, 그리고 지난 성과입니다.", "projects") +
       '<div class="grid g2">' + S.projects.map(projectCard).join("") + "</div>" +
       '<div class="row"><h2 class="mk">지난 성과</h2></div>' +
       '<div class="biz-grid">' + S.achievements.filter(function (a) { return a.img; }).map(bizCard).join("") + "</div>" +
@@ -313,7 +324,7 @@
       }).join("") + "</div>";
     }
     return (
-      head("연수·배우기", "디지털 윤리 수업이 처음인 선생님부터 연구회 정기 연수까지.") +
+      head("연수·배우기", "디지털 윤리 수업이 처음인 선생님부터 연구회 정기 연수까지.", "learn") +
       '<div class="tabs" role="tablist">' + learnTabs.map(function (t) {
         return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (t[0] === cur) + '">' + t[1] + "</button>";
       }).join("") + "</div>" +
@@ -329,13 +340,13 @@
   /* 공지 */
   views["notice"] = function () {
     var arr = S.notices.filter(function (n) { return n.pin; }).concat(S.notices.filter(function (n) { return !n.pin; }));
-    return head("공지", "연구회 소식과 모집 안내입니다.") + list(arr);
+    return head("공지", "연구회 소식과 모집 안내입니다.", "notice") + list(arr);
   };
 
   /* 소개 */
   views["about"] = function () {
     return (
-      '<div class="about-head"><img src="img/logo.png" alt="" width="88" height="90">' +
+      '<div class="about-head">' + icon("about") +
       "<div><h1>" + esc(S.site.name) + "</h1>" +
       '<p class="en">' + esc(S.site.nameEn) + "</p></div></div>" +
       '<p class="lead">“' + esc(S.site.slogan) + "” · " + esc(S.site.badge) + ", " + esc(S.site.members) + "(" + esc(S.site.membersNote) + ")</p>" +

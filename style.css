@@ -239,3 +239,18 @@ h2.mk::before{content:"";flex:none;width:26px;height:27px;background:url(img/log
 .lesson .ln{font-family:"Gaegu",cursive;font-size:28px;line-height:1;color:var(--accent)}
 .lesson .see{margin:0;font-weight:700}
 .lesson .take{margin:4px 0 0;color:var(--sub)}
+
+/* 머리 로고: 엠블럼 + 국문 + 영문 (공식 로고 배치) */
+.brand{gap:10px;min-width:0;flex:0 1 auto}
+.brand b{color:#4a4b4f;font-weight:900;letter-spacing:-.02em}
+:root[data-theme="dark"] .brand b{color:var(--ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brand b{color:var(--ink)}}
+.brand-text{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.brand-text b{font-size:19px}
+.brand-text small{font-size:10.5px;font-weight:500;color:var(--sub);letter-spacing:.01em;margin-top:2px;white-space:nowrap}
+@media (max-width:420px){.brand img{width:34px;height:auto}.brand-text b{font-size:17px}.brand-text small{font-size:clamp(8px,2.45vw,10px);letter-spacing:0}}
+
+/* 페이지 제목 아이콘 */
+.ph-ico{flex:none;width:52px;height:52px;border-radius:14px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-top:2px}
+.ph-ico svg{width:30px;height:30px}
+@media (max-width:520px){.ph-ico{width:42px;height:42px;border-radius:12px}.ph-ico svg{width:24px;height:24px}}
