@@ -172,13 +172,15 @@
       "<h1>" + esc(S.site.slogan) + "</h1>" +
       '<a class="btn on-b" href="#/library">' + ic("i-library") + "수업 자료 보기</a></div>" +
       '<div class="m-mark"><img src="' + B + 'img/logo.png" alt="디지털윤리교육연구회 엠블럼" width="120" height="123">' +
-      '<span class="m-num"><b>' + esc(String(S.site.members).replace(/\D/g, "")) + '</b>명</span><span class="m-cap">' + esc(S.site.membersNote) + "</span></div>" +
-      tile("#/library", "i-library", "자료실", S.resources.length, "r") +
-      tile("#/projects", "i-projects", "프로젝트", S.projects.length, "y") +
-      tile("#/learn", "i-learn", "배우기", "", "w") +
-      tile("#/notice", "i-notice", "공지", S.notices.length, "w") +
-      tile("#/learn/top", "i-trophy", "TOP 10", "", "b") +
-      tile("#/about", "i-about", "소개", "", "w") +
+      '<span class="m-num"><b>' + esc(String(S.site.members).replace(/\D/g, "")) + '</b>명</span>' +
+      '<span class="m-desc">' + S.regions.length + "개 권역의 선생님들이 함께 연구합니다</span>" +
+      '<span class="m-cap">' + esc(S.site.membersNote) + "</span></div>" +
+      tile("#/library", "i-library", "자료실", S.resources.length, "r", "수업 PPT·학습지·과정안") +
+      tile("#/projects", "i-projects", "프로젝트", S.projects.length, "y", "지금 하는 연구와 지난 성과") +
+      tile("#/learn", "i-learn", "배우기", "", "w", "처음 시작하기 · 연수 일정 · 꿀 링크") +
+      tile("#/notice", "i-notice", "공지", S.notices.length, "w", "회원 모집 · 연수 · 수업 소식") +
+      tile("#/learn/top", "i-trophy", "TOP 10", "", "b", "선생님들이 좋아한 앱·자료 순위") +
+      tile("#/about", "i-about", "소개", "", "w", "설립 목적 · 활동 방식 · 함께하기") +
       "</section>" +
 
       (cur ? sec("지금 하는 연구", "#/projects", "i-projects") + '<div class="now-proj">' + projectCard(cur) + "</div>" : "") +
@@ -193,9 +195,10 @@
       "</div>"
     );
   };
-  function tile(href, ico, label, num, c) {
+  function tile(href, ico, label, num, c, desc) {
     return '<a class="m-tile" data-c="' + c + '" href="' + href + '">' + ic(ico, "lg") +
-      '<span class="m-label">' + esc(label) + "</span>" +
+      '<span class="m-txt"><span class="m-label">' + esc(label) + "</span>" +
+      (desc ? '<span class="m-desc">' + esc(desc) + "</span>" : "") + "</span>" +
       (num !== "" ? '<span class="m-count">' + num + "</span>" : "") + "</a>";
   }
 

@@ -189,6 +189,9 @@ main { max-width: 1200px; margin: 0 auto; padding: var(--space-lg) var(--space-m
 .m-tile:hover { filter: brightness(1.06) saturate(1.1); }
 .m-tile[data-c="w"]:hover { background: var(--color-paper-2); filter: none; }
 .m-label { font-family: var(--font-display); font-size: var(--text-xl); white-space: nowrap; }
+.m-txt { display: flex; flex-direction: column; gap: var(--space-3xs); min-width: 0; }
+.m-desc { font-family: var(--font-body); font-size: var(--text-sm); font-weight: 500; line-height: 1.45; word-break: keep-all; overflow-wrap: anywhere; }
+.m-mark .m-desc { max-width: 15em; color: var(--color-ink); }
 .m-count { position: absolute; top: var(--space-sm); right: var(--space-md); font-family: var(--font-display); font-size: var(--text-2xl); line-height: 1; }
 .mond > a:nth-of-type(1) { grid-area: lib; }
 .mond > a:nth-of-type(2) { grid-area: proj; }
@@ -407,6 +410,7 @@ a.ibtn:hover { background: var(--color-ink); color: var(--color-paper); }
   .m-mark img { width: 84px; }
   .m-tile { min-height: 110px; padding: var(--space-sm); }
   .m-label { font-size: var(--text-lg); }
+  .m-desc { font-size: var(--text-xs); }
   .m-count { right: var(--space-sm); font-size: var(--text-xl); }
   .i.lg { width: 32px; height: 32px; }
 
