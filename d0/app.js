@@ -227,53 +227,211 @@
     );
   };
 
-  /* 자료실 */
+  /* 자료실: 교육자료/교사자료 · 흐르는 카드(기본)/목록 — 디자인 1~5와 같은 동작 */
+  function flowCard(r) {
+    var u = r.links && r.links[0] ? safeUrl(r.links[0][1]) : "";
+    var app = r.type === "웹앱";
+    var desc = r.desc || (r.grade.join(" · ") + (r.standard ? " · 성취기준 " + r.standard : "") + " · " + r.type);
+    var open = app ? "웹앱 열기 ↗" : r.links && r.links.length > 1 ? "PPT·학습지 열기 ↗" : r.links && r.links[0] ? r.links[0][0] + " 열기 ↗" : "열기 ↗";
+    return '<a class="mg-fc" href="' + esc(u || "#/library") + '"' + (u ? ext(u) : "") + ' draggable="false">' +
+      '<img src="../' + esc(r.wide || r.shot || r.cover) + '" alt="" width="800" height="500" draggable="false">' +
+      '<span class="mg-fb"><span class="mg-fbadge">' + esc(app ? "웹앱" : r.topic) + "</span>" +
+      '<b class="mg-ft">' + esc(r.title) + "</b>" +
+      '<span class="mg-fp">' + esc(desc) + "</span>" +
+      '<span class="mg-ff"><span>' + esc(r.grade.join(" · ")) + "</span><span>" + open + "</span></span></span></a>";
+  }
+  function flowHTML(items, label) {
+    return '<div class="mg-flow" tabindex="0" role="region" aria-roledescription="carousel" aria-label="' + esc(label) + ' (← → 키로 넘기기)">' +
+      items.map(flowCard).join("") +
+      '<button type="button" class="mg-fnav l" aria-label="이전">‹</button>' +
+      '<button type="button" class="mg-fnav r" aria-label="다음">›</button>' +
+      '<div class="mg-fcount"><span aria-live="polite"></span><button type="button" class="mg-fplay"></button></div></div>';
+  }
+  function bindFlow(flow) {
+    if (!flow) return;
+    var cards = [].slice.call(flow.querySelectorAll(".mg-fc")), N = cards.length;
+    if (!N) return;
+    var cnum = flow.querySelector(".mg-fcount span"), play = flow.querySelector(".mg-fplay");
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var SPEED = reduce ? 0.2 : 0.35, pos = 0, spd = SPEED, goal = null, auto = true, hover = false, drag = null, moved = false;
+    var last = 0, raf = 0, cw = 230, fx = 0.66, cur = -1;
+    function measure() { cw = cards[0].offsetWidth || 230; fx = parseFloat(getComputedStyle(flow).getPropertyValue("--fx")) || 0.66; }
+    function lerp(a, b, t) { return a + (b - a) * t; }
+    function offX(ad) { return ad <= 1 ? lerp(0, fx, ad) : ad <= 2 ? lerp(fx, fx * 1.6, ad - 1) : lerp(fx * 1.6, fx * 2.05, Math.min(ad - 2, 1)); }
+    function wrapD(i) { var d = (i - pos) % N; if (d > N / 2) d -= N; if (d < -N / 2) d += N; return d; }
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+    function paint() {
+      var c = ((Math.round(pos) % N) + N) % N;
+      cards.forEach(function (el, i) {
+        var d = wrapD(i), ad = Math.abs(d), sg = d < 0 ? -1 : 1;
+        if (ad > 3.2) { el.style.visibility = "hidden"; el.style.opacity = 0; return; }
+        el.style.visibility = "visible";
+        el.style.transform = "translate3d(" + (sg * cw * offX(ad)).toFixed(2) + "px,0," + (-ad * 120).toFixed(2) + "px) rotateY(" + (-sg * Math.min(ad, 2) * 10).toFixed(2) + "deg)";
+        el.style.opacity = ad <= 2 ? 1 : Math.max(0, 3 - ad).toFixed(3);
+        el.style.zIndex = 1000 - Math.round(ad * 100);
+        el.style.pointerEvents = ad > 2.4 ? "none" : "";
+        var on = i === c;
+        if (el.classList.contains("on") !== on) { el.classList.toggle("on", on); el.tabIndex = on ? 0 : -1; el.setAttribute("aria-hidden", on ? "false" : "true"); }
+      });
+      if (c !== cur) { cur = c; cnum.innerHTML = "<b>" + pad(cur + 1) + "</b> / " + pad(N); }
+    }
+    function tick(t) {
+      if (!flow.isConnected) { cancelAnimationFrame(raf); return; }
+      var dt = last ? Math.min(0.05, (t - last) / 1000) : 0; last = t;
+      if (!drag) {
+        if (goal !== null) {
+          pos += (goal - pos) * (1 - Math.pow(0.0025, dt));
+          if (Math.abs(goal - pos) < 0.002) { pos = goal; goal = null; spd = 0; }
+        } else {
+          var target = auto && !hover ? SPEED : 0;
+          spd += (target - spd) * Math.min(1, dt * 2.2);
+          pos += spd * dt;
+        }
+      }
+      if (pos > N * 4 || pos < -N * 4) { var gd = goal !== null ? goal - pos : null; pos = ((pos % N) + N) % N; if (gd !== null) goal = pos + gd; }
+      paint();
+      raf = requestAnimationFrame(tick);
+    }
+    function goTo(i) { goal = pos + wrapD(i); }
+    function step(n) { goal = (goal !== null ? goal : Math.round(pos)) + n; }
+    flow.querySelector(".mg-fnav.l").onclick = function (e) { e.stopPropagation(); step(-1); };
+    flow.querySelector(".mg-fnav.r").onclick = function (e) { e.stopPropagation(); step(1); };
+    function setPlay() {
+      play.textContent = auto ? "❚❚" : "▶";
+      play.setAttribute("aria-label", auto ? "자동 흐름 멈추기" : "자동 흐름 시작");
+      play.title = play.getAttribute("aria-label");
+    }
+    play.onclick = function (e) { e.stopPropagation(); auto = !auto; setPlay(); };
+    setPlay();
+    cards.forEach(function (el, i) {
+      el.addEventListener("click", function (e) {
+        if (moved) { e.preventDefault(); moved = false; return; }
+        if (i !== cur) { e.preventDefault(); goTo(i); }
+      });
+    });
+    flow.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+      else if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+    });
+    flow.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") hover = true; });
+    flow.addEventListener("pointerleave", function () { hover = false; });
+    flow.addEventListener("focusin", function () { hover = true; });
+    flow.addEventListener("focusout", function () { hover = false; });
+    flow.addEventListener("wheel", function (e) {
+      var d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+      if (!d) return;
+      e.preventDefault();
+      goal = (goal !== null ? goal : pos) + d / 240;
+    }, { passive: false });
+    flow.addEventListener("pointerdown", function (e) {
+      if (e.target.closest(".mg-fnav,.mg-fplay")) return;
+      drag = { x: e.clientX, p: pos, id: e.pointerId }; moved = false; goal = null;
+    });
+    flow.addEventListener("pointermove", function (e) {
+      if (!drag) return;
+      var dx = e.clientX - drag.x;
+      if (Math.abs(dx) > 6) {
+        if (!moved) { moved = true; flow.classList.add("drag"); try { flow.setPointerCapture(drag.id); } catch (x) {} }
+        pos = drag.p - dx / (cw * fx);
+      }
+    });
+    function endDrag() { if (!drag) return; drag = null; flow.classList.remove("drag"); if (moved) { goal = Math.round(pos); spd = 0; } }
+    flow.addEventListener("pointerup", endDrag);
+    flow.addEventListener("pointercancel", endDrag);
+    flow.addEventListener("lostpointercapture", endDrag);
+    window.addEventListener("resize", function () { measure(); paint(); });
+    measure(); paint();
+    raf = requestAnimationFrame(tick);
+  }
+
   var filt = { q: "", grade: "", topic: "" };
+  var lib = { aud: "edu", view: "flow" };
+  try { var lsv = JSON.parse(localStorage.getItem("dew:lib") || "null"); if (lsv) { lib.aud = lsv.aud === "teacher" ? "teacher" : "edu"; lib.view = lsv.view === "list" ? "list" : "flow"; } } catch (e) {}
+  function saveLib() { try { localStorage.setItem("dew:lib", JSON.stringify(lib)); } catch (e) {} }
+  var AUD = { edu: ["교육자료", "학생과 함께 쓰는 수업 PPT·학습지·참고 자료"], teacher: ["교사자료", "교사가 쓰는 과정안과 연구회원이 만든 웹앱"] };
+  function aud(r) { return r.aud || (r.type === "웹앱" || r.type === "교수학습과정안" ? "teacher" : "edu"); }
+  function inAud(r) { return !lib.aud || aud(r) === lib.aud; }
+  var SVG_GRID = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>';
+  var SVG_FLOW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="4" width="10" height="16" rx="2"/><path d="M3 7v10M21 7v10"/></svg>';
+  var SVG_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
   views["library"] = function () {
-    var used = S.topics.filter(function (t) { return S.resources.some(function (r) { return r.topic === t; }); });
+    var segs = ["edu", "teacher"].map(function (k) {
+      var n = S.resources.filter(function (r) { return aud(r) === k; }).length;
+      return '<button type="button" data-aud="' + k + '" aria-pressed="' + (lib.aud === k) + '">' + AUD[k][0] + "<small>" + n + "</small></button>";
+    }).join("");
+    return (
+      head("자료실", "연구회가 서산교육지원청과 함께 만든 수업 자료와 연구회원이 만든 웹앱입니다. 수업 PPT는 사본을 만들어 우리 반에 맞게 고쳐 쓰세요.", "library") +
+      '<div class="lib-bar"><div class="lib-seg" role="group" aria-label="자료 구분">' + segs + "</div>" +
+      '<div class="lib-act"><button type="button" class="lib-view"></button><button type="button" class="lib-all"></button></div></div>' +
+      '<div id="libbody"></div>'
+    );
+  };
+  function listHTML() {
+    var used = S.topics.filter(function (t) { return S.resources.some(function (r) { return inAud(r) && r.topic === t; }); });
+    if (filt.topic && used.indexOf(filt.topic) < 0) filt.topic = "";
     function chips(key, arr) {
       return ['<button type="button" class="fchip" data-k="' + key + '" data-v="" aria-pressed="' + (filt[key] === "") + '">전체</button>']
         .concat(arr.map(function (v) {
           return '<button type="button" class="fchip" data-k="' + key + '" data-v="' + esc(v) + '" aria-pressed="' + (filt[key] === v) + '">' + esc(v) + "</button>";
         })).join("");
     }
-    return (
-      head("자료실", "연구회가 서산교육지원청과 함께 만든 디지털 윤리 수업 자료입니다. 수업 PPT는 사본을 만들어 우리 반에 맞게 고쳐 쓰세요.", "library") +
-      '<div class="filters">' +
+    return '<div class="filters">' +
       '<label for="q" class="vh">자료 검색</label>' +
       '<input id="q" class="search" type="search" placeholder="제목·성취기준으로 찾기 (예: 딥페이크, 6도)" value="' + esc(filt.q) + '">' +
       '<div class="fgroup" role="group" aria-label="학년군"><span class="lbl">학년</span>' + chips("grade", S.grades) + "</div>" +
       '<div class="fgroup" role="group" aria-label="주제"><span class="lbl">주제</span>' + chips("topic", used) + "</div>" +
       "</div>" +
       '<p class="count" id="count" aria-live="polite"></p>' +
-      '<div class="grid g3" id="reslist"></div>'
-    );
-  };
+      '<div class="grid g3" id="reslist"></div>';
+  }
   function drawLibrary() {
     var q = filt.q.trim().toLowerCase();
     var arr = S.resources.filter(function (r) {
-      return (!filt.grade || r.grade.indexOf(filt.grade) > -1) &&
+      return inAud(r) && (!filt.grade || r.grade.indexOf(filt.grade) > -1) &&
         (!filt.topic || r.topic === filt.topic) &&
-        (!q || (r.title + " " + r.topic + " " + r.standard).toLowerCase().indexOf(q) > -1);
+        (!q || (r.title + " " + r.topic + " " + r.standard + " " + (r.desc || "")).toLowerCase().indexOf(q) > -1);
     });
     document.getElementById("count").textContent = "자료 " + arr.length + "개";
     document.getElementById("reslist").innerHTML = arr.length
       ? arr.map(resCard).join("")
       : '<div style="grid-column:1/-1">' + empty("조건에 맞는 자료가 아직 없습니다. 필터를 줄여 보세요.") + "</div>";
   }
-  function bindLibrary() {
-    var q = document.getElementById("q");
-    q.addEventListener("input", function () { filt.q = q.value; drawLibrary(); });
-    main.querySelectorAll(".fchip").forEach(function (b) {
-      b.addEventListener("click", function () {
-        filt[b.dataset.k] = b.dataset.v;
-        main.querySelectorAll('.fchip[data-k="' + b.dataset.k + '"]').forEach(function (x) {
-          x.setAttribute("aria-pressed", x === b);
+  function drawLibBody() {
+    var body = document.getElementById("libbody");
+    var items = S.resources.filter(inAud);
+    var vb = main.querySelector(".lib-view"), all = main.querySelector(".lib-all");
+    vb.innerHTML = lib.view === "flow" ? SVG_GRID : SVG_FLOW;
+    vb.setAttribute("aria-label", lib.view === "flow" ? "목록으로 보기" : "흐르는 카드로 보기");
+    vb.title = vb.getAttribute("aria-label");
+    all.innerHTML = lib.view === "flow" ? "전체 " + items.length + " " + SVG_ARROW : "흐름으로 " + SVG_ARROW;
+    main.querySelectorAll(".lib-seg button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.aud === lib.aud); });
+    if (lib.view === "flow") {
+      body.innerHTML = '<p class="lib-lede">' + (lib.aud ? AUD[lib.aud][1] + " · " : "") + "가운데 카드를 누르면 열립니다 · 끌거나 ← → 로 넘기기</p>" +
+        flowHTML(items, lib.aud ? AUD[lib.aud][0] : "자료");
+      bindFlow(body.querySelector(".mg-flow"));
+    } else {
+      body.innerHTML = listHTML();
+      var q = document.getElementById("q");
+      q.addEventListener("input", function () { filt.q = q.value; drawLibrary(); });
+      body.querySelectorAll(".fchip").forEach(function (b) {
+        b.addEventListener("click", function () {
+          filt[b.dataset.k] = b.dataset.v;
+          body.querySelectorAll('.fchip[data-k="' + b.dataset.k + '"]').forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
+          drawLibrary();
         });
-        drawLibrary();
       });
+      drawLibrary();
+    }
+  }
+  function bindLibrary() {
+    main.querySelectorAll(".lib-seg button").forEach(function (b) {
+      b.addEventListener("click", function () { lib.aud = b.dataset.aud; saveLib(); drawLibBody(); });
     });
-    drawLibrary();
+    function flip() { lib.view = lib.view === "flow" ? "list" : "flow"; saveLib(); drawLibBody(); }
+    main.querySelector(".lib-view").addEventListener("click", flip);
+    main.querySelector(".lib-all").addEventListener("click", flip);
+    drawLibBody();
   }
 
   /* 프로젝트 */
