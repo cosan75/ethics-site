@@ -123,5 +123,6 @@ main { max-width: 1240px; }
   .mg-cap b { font-size: var(--text-sm); }
   .mg-poster.big .mg-cap { padding: var(--space-xl) var(--space-sm) var(--space-sm); }
   .mg-rank { columns: 1; }
+  .mg-list small { display: none; }
   .mg-head h2 { font-size: var(--text-xl); }
 }

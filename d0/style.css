@@ -276,3 +276,13 @@ html,body{overflow-x:clip}
 :root[data-theme="dark"] .brand .logo-full.lt{display:none}
 :root[data-theme="dark"] .brand .logo-full.dk{display:block}
 @media (max-width:560px){.brand .logo-full{height:32px}}
+
+/* 소식 채널 */
+.sns-h{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--paper)}
+.sns-h.ig{color:#d6246e}.sns-h.yt{color:#e5202b}
+.social{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.sns{display:inline-flex;align-items:center;gap:8px;padding:4px 14px 4px 4px;border:1px solid var(--line);border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;color:inherit;background:var(--paper);white-space:nowrap}
+.sns-ico{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;color:#fff}
+.sns-ico svg{width:18px;height:18px}
+.sns.ig .sns-ico{background:#d6246e}.sns.yt .sns-ico{background:#e5202b}
+@media (max-width:560px){.top .sns-h{display:none}}
