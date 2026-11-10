@@ -48,6 +48,7 @@ main { max-width: 1240px; }
 }
 .mg-poster.big { aspect-ratio: 430 / 602; }
 .mg-poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-med) var(--ease-out); }
+.mg-poster:not(.big) img { object-position: center top; }
 .mg-poster:hover img { transform: scale(1.04); }
 .mg-cap {
   position: absolute; left: 0; right: 0; bottom: 0;
