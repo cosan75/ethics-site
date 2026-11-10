@@ -268,3 +268,11 @@ h2.mk::before{content:"";flex:none;width:26px;height:27px;background:url(img/log
 html,body{overflow-x:clip}
 .sw3{background:#cfe8dc}
 .sw4{background:#1fa463}
+
+/* 공식 로고 */
+.brand .logo-full{width:auto;height:40px}
+.brand .logo-full.dk{display:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brand .logo-full.lt{display:none}:root:not([data-theme="light"]) .brand .logo-full.dk{display:block}}
+:root[data-theme="dark"] .brand .logo-full.lt{display:none}
+:root[data-theme="dark"] .brand .logo-full.dk{display:block}
+@media (max-width:560px){.brand .logo-full{height:32px}}
