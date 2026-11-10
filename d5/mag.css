@@ -52,14 +52,16 @@ main { max-width: 1240px; }
 .mg-cap {
   position: absolute; left: 0; right: 0; bottom: 0;
   display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
-  padding: var(--space-xl) var(--space-sm) var(--space-sm);
-  background: linear-gradient(to top, var(--color-scrim), transparent);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-scrim); color: var(--color-on-scrim);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border-top: var(--rule-thin) solid var(--color-hair);
 }
 .mg-cap b { font-size: var(--text-md); line-height: 1.35; }
-.mg-cap span:not(.st), .mg-cap small { font-size: var(--text-xs); opacity: 0.9; }
+.mg-cap span:not(.st), .mg-cap small { font-size: var(--text-xs); color: var(--color-ink-2); }
 .mg-cap .st { font-size: var(--text-xs); }
-.mg-poster.big .mg-cap { padding: var(--space-2xl) var(--space-md) var(--space-md); gap: var(--space-3xs); }
-.mg-poster.big .mg-cap b { font-size: var(--text-display); line-height: 1.2; }
+.mg-poster.big .mg-cap { padding: var(--space-sm) var(--space-md); gap: var(--space-3xs); }
+.mg-poster.big .mg-cap b { font-size: var(--text-2xl); line-height: 1.25; }
 .mg-poster.big .mg-cap span:not(.st) { font-size: var(--text-md); }
 
 /* ---------- 수업 자료 표지 줄 ---------- */
@@ -121,11 +123,11 @@ main { max-width: 1240px; }
   }
   .mg-cover { scroll-snap-align: start; }
   .mg-quad { gap: var(--space-2xs); }
-  .mg-poster:not(.big) .mg-cap { padding: var(--space-lg) var(--space-2xs) var(--space-2xs); }
+  .mg-poster:not(.big) .mg-cap { padding: var(--space-2xs); }
   .mg-poster:not(.big) .mg-cap small, .mg-poster:not(.big) .mg-cap .st { display: none; }
   .mg-cap b { font-size: var(--text-sm); }
   .mg-hero { gap: var(--space-2xs); }
-  .mg-poster.big .mg-cap { padding: var(--space-xl) var(--space-2xs) var(--space-2xs); }
+  .mg-poster.big .mg-cap { padding: var(--space-2xs); }
   .mg-poster.big .mg-cap b { font-size: var(--text-lg); }
   .mg-poster.big .mg-cap span:not(.st), .mg-poster.big .mg-cap small { display: none; }
   .mg-rank { columns: 1; }
