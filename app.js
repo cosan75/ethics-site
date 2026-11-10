@@ -589,6 +589,13 @@
   }
   window.addEventListener("hashchange", route);
 
+  /* 로고: 언제 눌러도 첫 화면 맨 위로 (이미 첫 화면이면 다시 그리고 위로) */
+  document.querySelectorAll(".logo").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (location.hash === "#/" || location.hash === "" || location.hash === "#") { e.preventDefault(); route(); }
+    });
+  });
+
   /* 상단 검색 → 자료실 */
   document.getElementById("topsearch").addEventListener("submit", function (e) {
     e.preventDefault();

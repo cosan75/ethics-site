@@ -577,6 +577,13 @@
   }
   window.addEventListener("hashchange", route);
 
+  /* 로고: 언제 눌러도 첫 화면 맨 위로 (이미 첫 화면이면 다시 그리고 위로) */
+  document.querySelectorAll(".brand").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (location.hash === "#/" || location.hash === "" || location.hash === "#") { e.preventDefault(); route(); }
+    });
+  });
+
   /* ---------- 밝기 ---------- */
   var root = document.documentElement;
   try { var saved = localStorage.getItem("dew:theme"); if (saved) root.dataset.theme = saved; } catch (e) {}
