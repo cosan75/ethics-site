@@ -62,7 +62,7 @@ window.SITE = {
     { title: "스마트폰 과의존을 예방해요", grade: ["초 3~4"], topic: "디지털 과의존", type: "수업 PPT·학습지",
       standard: "[4도01-03]", links: [["수업 PPT", "https://zrr.kr/7gC7nK"], ["학습지", "https://zrr.kr/OOK6Sl"]], cover: "img/res/r06.jpg", wide: "img/res/w06.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
     { title: "태블릿 기초 활용 교육", grade: ["초 3~4"], topic: "디지털 기초", type: "참고 자료",
-      standard: "[4국06-01]", links: [["자료", "https://zrr.kr/Kmexrz"]], cover: "img/res/r07.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
+      standard: "[4국06-01]", links: [["자료", "https://zrr.kr/Kmexrz"]], cover: "img/res/r07.jpg", wide: "img/res/w07.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
 
     { title: "인공지능을 올바르게 사용하기", grade: ["초 5~6"], topic: "AI 윤리", type: "수업 PPT·학습지",
       standard: "[6실05-05]", links: [["수업 PPT", "https://zrr.kr/c1S1Nt"], ["학습지", "https://zrr.kr/n6a5bQ"]], cover: "img/res/r08.jpg", wide: "img/res/w08.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
@@ -77,12 +77,12 @@ window.SITE = {
     { title: "우리 모두가 지키는 저작권", grade: ["초 5~6"], topic: "저작권", type: "수업 PPT·학습지",
       standard: "[6도01-02]", links: [["수업 PPT", "https://zrr.kr/NT5hch"], ["학습지", "https://zrr.kr/yDw3wJ"]], cover: "img/res/r13.jpg", wide: "img/res/w13.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
     { title: "컴퓨터 기초 활용 교육", grade: ["초 5~6"], topic: "디지털 기초", type: "참고 자료",
-      standard: "[6실04-03]", links: [["자료", "https://zrr.kr/68wjA6"]], cover: "img/res/r14.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
+      standard: "[6실04-03]", links: [["자료", "https://zrr.kr/68wjA6"]], cover: "img/res/r14.jpg", wide: "img/res/w14.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
 
     { title: "교수학습과정안 모음 (3~4학년군)", grade: ["교사용", "초 3~4"], topic: "디지털 기초", type: "교수학습과정안",
-      standard: "", links: [["과정안 내려받기", "https://zrr.kr/bdy2JY"]], cover: "img/res/r15.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
+      standard: "", links: [["과정안 내려받기", "https://zrr.kr/bdy2JY"]], cover: "img/res/r15.jpg", wide: "img/res/w15.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
     { title: "교수학습과정안 모음 (5~6학년군)", grade: ["교사용", "초 5~6"], topic: "디지털 기초", type: "교수학습과정안",
-      standard: "", links: [["과정안 내려받기", "https://zrr.kr/ggCvd0"]], cover: "img/res/r16.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
+      standard: "", links: [["과정안 내려받기", "https://zrr.kr/ggCvd0"]], cover: "img/res/r16.jpg", wide: "img/res/w16.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
     /* 연구회원이 만들어 GitHub Pages에 배포한 웹앱 (썸네일 = 실제 화면 캡처, img/apps/) */
     { title: "위임의 기술 — 6D로 살아남는 한 학기", grade: ["교사용"], topic: "AI 윤리", type: "웹앱",
       standard: "", desc: "교사 AI 리터러시 시뮬레이션 게임 · AI에게 무엇을 맡기고 무엇을 지킬지 6D로 고르며 한 학기를 보냄", links: [["웹앱", "https://cosan75.github.io/ks6dai/"]], shot: "img/apps/ks6dai.jpg", source: "연구회원 제작 · GitHub Pages", year: 2026 },

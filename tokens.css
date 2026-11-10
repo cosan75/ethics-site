@@ -3,6 +3,7 @@
  * axes: light / display-heavy / warm-pastel
  */
 :root{
+  --color-lift: oklch(25% 0.03 265 / 0.22);
   /* 크림 종이 · 남색 먹선 · 파스텔 면 */
   --color-paper:    oklch(97.5% 0.012 85);
   --color-paper-2:  oklch(94% 0.02 85);
