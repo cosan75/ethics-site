@@ -545,3 +545,5 @@ a.ibtn:hover { background: var(--color-ink); color: var(--color-paper); }
 }
 a.lib-view, a.lib-all { text-decoration: none; }
 .home-lib { margin-bottom: var(--space-md); }
+/* 첫 화면 큰 칸 포스터: 기본은 숨김(디자인 3에서만 보임) */
+.m-hero-pic { display: none; }

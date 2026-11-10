@@ -1,10 +1,10 @@
-/* Hallmark · layer: design 3 "조용한 팝아트" over style.css + pop.css
- * tone: Julian Opie식 가는 외곽선 · 평면 색 · 망점 없음 · 그림자는 마우스를 올릴 때만
- * pre-emit critique: P4 H4 E4 S4 R5 V4
+/* Hallmark · layer: design 3 "또렷한 팝아트" over style.css + pop.css
+ * tone: 굵은 고딕(900) · 남색 큰 칸 + 연구회 주황 한 점 · 흰 칸은 2px 먹선 · 포스터 사진
+ * pre-emit critique: P4 H5 E4 S4 R4 V4
  */
 
 body { background-image: none; line-height: 1.7; }
-h1, h2 { font-weight: 400; }
+h1, h2, h3, .m-label { font-weight: 900; letter-spacing: -0.02em; }
 
 /* 망점 끄기 */
 .m-hero, .m-tile, .res-top, .steps li, .quad li, .team, .join, .ph-sq, .proj-img.blank, .dday .d { background-image: none; }
@@ -33,3 +33,39 @@ h1, h2 { font-weight: 400; }
 .res-top { border-bottom-color: var(--color-hair); }
 .proj-img { border-color: var(--color-hair); }
 .gallery img { border-bottom-color: var(--color-hair); }
+
+/* ---------- 2026-11-10 강화: 두 색 · 굵은 글씨 · 포스터 ---------- */
+.mond > * { box-shadow: none; }
+.m-hero[data-c="b"] {
+  background: var(--color-navy); color: var(--color-on-navy);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto auto auto;
+  column-gap: var(--space-lg); align-items: start; justify-content: stretch;
+  container-type: inline-size;
+}
+.m-hero > .m-kicker, .m-hero > h1, .m-hero > .btn { grid-column: 1; }
+.m-hero > .m-kicker { grid-row: 2; background: var(--color-orange); color: var(--color-on-orange); border-color: var(--color-orange); width: fit-content; max-width: 100%; border-radius: var(--radius-sm); }
+.m-hero > h1 { grid-row: 3; color: var(--color-on-navy); font-size: clamp(1.8rem, 7.2cqi, 3.4rem); line-height: 1.12; overflow-wrap: normal; }
+.m-hero > .btn { grid-row: 4; align-self: start; width: max-content; max-width: 100%; white-space: nowrap; background: var(--color-orange); color: var(--color-on-orange); border-color: var(--color-orange); }
+.m-hero > .btn:hover { background: var(--color-paper); color: var(--color-ink); }
+.m-hero-pic { display: block; grid-column: 2; grid-row: 1 / -1; align-self: center; border-radius: var(--radius-sm); overflow: hidden; border: 3px solid var(--color-on-navy); transition: transform var(--dur-short) var(--ease-out); }
+.m-hero-pic:hover { transform: translateY(-3px) rotate(-1deg); }
+.m-hero-pic img { display: block; width: auto; height: auto; max-height: 300px; max-width: 220px; }
+@container (max-width: 560px) { .m-hero-pic { display: none; } .m-hero > h1 { font-size: clamp(1.7rem, 10cqi, 2.6rem); } }
+.m-mark { background: var(--color-paper); }
+.m-num b { font-weight: 900; font-size: var(--text-display); color: var(--color-orange); }
+.mond > a:nth-of-type(1) { background-color: var(--color-orange); color: var(--color-on-orange); }
+.mond > a:nth-of-type(2), .mond > a:nth-of-type(3), .mond > a:nth-of-type(4), .mond > a:nth-of-type(6) { background-color: var(--color-paper); color: var(--color-ink); }
+.mond > a:nth-of-type(5) { background-color: var(--color-navy); color: var(--color-on-navy); }
+.m-tile:hover { background-color: var(--color-paper-2); }
+.mond > a:nth-of-type(1):hover { background-color: var(--color-orange); }
+.mond > a:nth-of-type(5):hover { background-color: var(--color-navy); }
+.m-count { font-weight: 900; color: var(--color-orange); }
+.mond > a:nth-of-type(1) .m-count { color: var(--color-on-orange); }
+.m-tile { container-type: inline-size; }
+.m-label { font-size: clamp(1.15rem, 14cqi, var(--text-2xl)); white-space: nowrap; }
+.topnav a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--color-orange); }
+.search button { background: var(--color-navy); color: var(--color-on-navy); }
+.sec h2, main h2 { font-weight: 900; }
+@media (max-width: 720px) {
+  .m-label { font-size: var(--text-lg); }
+}

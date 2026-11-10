@@ -297,7 +297,9 @@
       '<div class="m-hero" data-c="b">' +
       '<p class="m-kicker">' + esc(S.site.badge) + "</p>" +
       "<h1>" + esc(S.site.slogan) + "</h1>" +
-      '<a class="btn on-b" href="#/library">' + ic("i-library") + "수업 자료 보기</a></div>" +
+      '<a class="btn on-b" href="#/library">' + ic("i-library") + "수업 자료 보기</a>" +
+      (cur && cur.img ? '<a class="m-hero-pic" href="#/projects" title="' + esc(cur.title) + '"><img src="' + esc(B + cur.img) + '" alt="' + esc(cur.title) + ' 포스터" width="432" height="608"></a>' : "") +
+      "</div>" +
       '<div class="m-mark"><img src="' + B + 'img/logo.png" alt="디지털윤리교육연구회 엠블럼" width="120" height="123">' +
       '<span class="m-num"><b>' + esc(String(S.site.members).replace(/\D/g, "")) + '</b>명</span>' +
       '<span class="m-desc">' + S.regions.length + "개 권역의 선생님들이 함께 연구합니다</span>" +
