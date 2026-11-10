@@ -112,19 +112,19 @@ window.SITE = {
     },
     {
       title: "디지털윤리교육 플랫폼",
-      org: "연구회 자체 사업",
+      org: "연구회 자체 사업", img: "img/biz/platform.jpg",
       topic: "디지털 기초", status: "진행 중", period: "2026",
       goal: "연구회가 만든 디지털 윤리 교육자료를 한곳에 모으는 이 사이트, 유튜브·인디스쿨로 홍보"
     },
     {
       title: "권역별 모임 운영",
-      org: "서부 · 동북부 · 동남부 권역",
+      org: "서부 · 동북부 · 동남부 권역", img: "img/biz/regions.jpg",
       topic: "디지털 시민성", status: "진행 중", period: "2026",
       goal: "권역별로 모여 지역 사업을 추진하고, 전체 사업은 프로젝트 팀(TF)으로 진행"
     },
     {
       title: "연구회 도서 집필",
-      org: "연구회 자체 사업",
+      org: "연구회 자체 사업", img: "img/biz/book.jpg",
       topic: "디지털 시민성", status: "준비 중", period: "2026",
       goal: "디지털 윤리에 대한 연구 사례를 담은 도서"
     }
