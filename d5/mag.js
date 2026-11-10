@@ -83,7 +83,7 @@
     if (!N) return;
     var cnum = flow.querySelector(".mg-fcount span"), play = flow.querySelector(".mg-fplay");
     var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var SPEED = 0.35, pos = 0, spd = reduce ? 0 : SPEED, goal = null, auto = !reduce, hover = false, drag = null, moved = false;
+    var SPEED = reduce ? 0.2 : 0.35, pos = 0, spd = SPEED, goal = null, auto = true, hover = false, drag = null, moved = false;
     var last = 0, raf = 0, cw = 230, fx = 0.66, cur = -1;
     function measure() { cw = cards[0].offsetWidth || 230; fx = parseFloat(getComputedStyle(flow).getPropertyValue("--fx")) || 0.66; }
     function lerp(a, b, t) { return a + (b - a) * t; }
