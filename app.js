@@ -74,6 +74,7 @@
     }).join("");
     return (
       '<article class="res" data-c="' + t[1] + '">' +
+      (r.cover ? '<img class="res-cover" src="' + esc(B + r.cover) + '" alt="" loading="lazy" width="640" height="800">' : "") +
       '<div class="res-top"><span class="res-ico" title="' + esc(r.topic) + '">' + ic(t[0]) + "</span>" +
       '<span class="res-topic">' + esc(r.topic) + "</span></div>" +
       "<h3>" + esc(r.title) + "</h3>" +

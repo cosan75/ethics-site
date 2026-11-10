@@ -267,7 +267,7 @@ h2.mk::before{content:"";flex:none;width:26px;height:27px;background:url(img/log
 
 html,body{overflow-x:clip}
 .sw3{background:#cfe8dc}
-.sw4{background:#1fa463}
+.sw4{background:#1fa463}.sw5{background:#e07b1a}
 
 /* 공식 로고 */
 .brand .logo-full{width:auto;height:40px}

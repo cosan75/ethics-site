@@ -103,6 +103,7 @@ button, input { font: inherit; color: inherit; }
 .sw2 { background: var(--swatch-2); }
 .sw3 { background: var(--swatch-3); }
 .sw4 { background: var(--swatch-4); }
+.sw5 { background: var(--swatch-5); }
 
 /* ---------- 머리 로고: 연구회 공식 로고 ---------- */
 .logo .logo-full { width: auto; height: 44px; }
@@ -441,3 +442,6 @@ a.ibtn:hover { background: var(--color-ink); color: var(--color-paper); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* 수업 자료 표지: 디자인 5에서만 보임 */
+.res-cover{display:none}

@@ -20,7 +20,7 @@
     if (q === "2") { localStorage.setItem(k, "2"); history.replaceState(null, "", location.pathname + location.hash); return; }
     var s = localStorage.getItem(k);
     if (s === "2") return;
-    location.replace("d" + (s === "0" || s === "1" || s === "4" ? s : "3") + "/" + location.hash);
+    location.replace("d" + (s === "0" || s === "1" || s === "4" || s === "5" ? s : "3") + "/" + location.hash);
   } catch (e) {}
 })();
 </script>
@@ -55,6 +55,7 @@
         <a href="./?d=2" aria-current="true"><span class="sw sw2"></span>디자인 2 · 팝아트</a>
         <a href="d3/"><span class="sw sw3"></span>디자인 3 · 조용한 팝아트</a>
         <a href="d4/"><span class="sw sw4"></span>디자인 4 · 포털</a>
+        <a href="d5/"><span class="sw sw5"></span>디자인 5 · 이미지</a>
       </div>
     </details>
     <button class="iconbtn theme" type="button" aria-label="화면 밝기 바꾸기" title="밝기"><svg class="i"><use href="#i-moon"/></svg></button>
