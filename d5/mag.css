@@ -54,7 +54,7 @@ main { max-width: 1240px; }
   display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
   padding: var(--space-xs) var(--space-sm);
   background: var(--color-scrim); color: var(--color-on-scrim);
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
   border-top: var(--rule-thin) solid var(--color-hair);
 }
 .mg-cap b { font-size: var(--text-md); line-height: 1.35; }

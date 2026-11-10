@@ -25,7 +25,7 @@
   --color-brand:    oklch(75% 0.17 70);
   --color-focus:    oklch(60% 0.16 55);
   --color-lift:     oklch(20% 0.01 60 / 0.14);
-  --color-scrim:    oklch(100% 0 0 / 0.84);
+  --color-scrim:    oklch(100% 0 0 / 0.62);
   --color-on-scrim: oklch(20% 0.01 60);
 
   --font-display: "Noto Sans KR", system-ui, sans-serif;
@@ -73,7 +73,7 @@
     --color-sky: oklch(30% 0.04 240); --color-red: oklch(31% 0.04 25); --color-yellow: oklch(33% 0.05 95);
     --color-mint: oklch(31% 0.05 150); --color-lilac: oklch(30% 0.04 300);
     --color-on-red: oklch(94% 0.005 250); --color-on-yellow: oklch(94% 0.005 250);
-    --color-hot: oklch(75% 0.14 25); --color-lift: oklch(0% 0 0 / 0.4); --color-scrim: oklch(20% 0.01 60 / 0.82); --color-on-scrim: oklch(96% 0.005 60);
+    --color-hot: oklch(75% 0.14 25); --color-lift: oklch(0% 0 0 / 0.4); --color-scrim: oklch(20% 0.01 60 / 0.64); --color-on-scrim: oklch(96% 0.005 60);
   }
 }
 :root[data-theme="dark"]{
@@ -84,5 +84,5 @@
   --color-sky: oklch(30% 0.04 240); --color-red: oklch(31% 0.04 25); --color-yellow: oklch(33% 0.05 95);
   --color-mint: oklch(31% 0.05 150); --color-lilac: oklch(30% 0.04 300);
   --color-on-red: oklch(94% 0.005 250); --color-on-yellow: oklch(94% 0.005 250);
-  --color-hot: oklch(75% 0.14 25); --color-lift: oklch(0% 0 0 / 0.4); --color-scrim: oklch(20% 0.01 60 / 0.82); --color-on-scrim: oklch(96% 0.005 60);
+  --color-hot: oklch(75% 0.14 25); --color-lift: oklch(0% 0 0 / 0.4); --color-scrim: oklch(20% 0.01 60 / 0.64); --color-on-scrim: oklch(96% 0.005 60);
 }
