@@ -352,6 +352,13 @@
     );
   };
 
+  /* 다른 디자인(포털 등)이 홈 화면을 바꿀 수 있게 */
+  if (typeof window.HOME_VIEW === "function") {
+    var kit = { S: S, B: B, esc: esc, ic: ic, topic: topic, safeUrl: safeUrl, ext: ext, resCard: resCard, rankList: rankList,
+      list: list, ddayCard: ddayCard, upcoming: upcoming, projectCard: projectCard, status: status, linkIcon: linkIcon, linkShort: linkShort };
+    views[""] = function () { return window.HOME_VIEW(kit); };
+  }
+
   /* ---------- 라우터 ---------- */
   var titles = { "": "", library: "자료실", projects: "프로젝트", learn: "배우기", notice: "공지", about: "소개" };
   function route() {
@@ -365,6 +372,7 @@
     });
     if (page === "library") bindLibrary();
     if (page === "learn") bindLearn();
+    if (page === "" && typeof window.HOME_BIND === "function") window.HOME_BIND(main);
     window.scrollTo(0, 0);
     if (route.started) main.focus({ preventScroll: true });
     route.started = true;

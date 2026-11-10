@@ -102,6 +102,7 @@ button, input { font: inherit; color: inherit; }
 .sw1 { background: var(--swatch-1); }
 .sw2 { background: var(--swatch-2); }
 .sw3 { background: var(--swatch-3); }
+.sw4 { background: var(--swatch-4); }
 
 /* ---------- 본문 ---------- */
 main { max-width: 1200px; margin: 0 auto; padding: var(--space-lg) var(--space-md) var(--space-xl); outline: none; }
