@@ -310,15 +310,15 @@
       tile("#/about", "i-about", "소개", "", "w", "설립 목적 · 활동 방식 · 함께하기") +
       "</section>" +
 
-      (cur ? sec("지금 하는 연구", "#/projects", "i-projects") + '<div class="now-proj">' + projectCard(cur) + "</div>" : "") +
-
-      sec("자료실", "#/library", "i-library") + homeLibHTML() +
-
-      '<div class="split">' +
+      '<div class="split home-quick">' +
       "<section>" + sec("교사 인기 TOP 3", "#/learn/top", "i-trophy") + rankList(S.dormsTop.items, 3) + "</section>" +
       "<section>" + sec("일정 · 공지", "#/notice", "i-calendar") +
       (up.length ? up.slice(0, 1).map(ddayCard).join("") : "") + list(S.notices.slice(0, 2)) + "</section>" +
-      "</div>"
+      "</div>" +
+
+      (cur ? sec("지금 하는 연구", "#/projects", "i-projects") + '<div class="now-proj">' + projectCard(cur) + "</div>" : "") +
+
+      sec("자료실", "#/library", "i-library") + homeLibHTML()
     );
   };
   function tile(href, ico, label, num, c, desc) {
