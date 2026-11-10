@@ -29,7 +29,7 @@
   var TOPIC = {
     "개인정보": ["t-privacy", "r"], "사이버 예절": ["t-manners", "y"], "디지털 과의존": ["t-overuse", "r"],
     "AI 윤리": ["t-ai", "b"], "미디어 리터러시": ["t-media", "y"], "디지털 안전": ["t-safety", "b"],
-    "저작권": ["t-copyright", "r"], "디지털 기초": ["t-basic", "b"], "디지털 시민성": ["t-citizen", "y"]
+    "저작권": ["t-copyright", "r"], "디지털 기초": ["t-basic", "b"], "디지털 시민성": ["t-citizen", "y"], "웹앱": ["i-link", "y"]
   };
   function topic(t) { return TOPIC[t] || ["t-basic", "b"]; }
   function linkIcon(label) {
@@ -225,7 +225,7 @@
       '<input id="q" type="search" placeholder="제목·성취기준 (예: 딥페이크, 6도)" value="' + esc(filt.q) + '"></div>' +
       grades + topics + "</div>" +
       '<div class="grid g3" id="reslist"></div>' +
-      '<p class="fine">' + ic("i-source", "sm") + "서산교육지원청 × 연구회 · 2026 · PPT는 사본을 만들어 고쳐 쓰세요</p>"
+      '<p class="fine">' + ic("i-source", "sm") + "수업 PPT·학습지: 서산교육지원청 × 연구회 · 웹앱: 연구회원 제작 · 2026 · PPT는 사본을 만들어 고쳐 쓰세요</p>"
     );
   };
   function drawLibrary() {

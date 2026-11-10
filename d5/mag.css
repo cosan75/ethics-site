@@ -65,14 +65,41 @@ main { max-width: 1240px; }
 .mg-poster.big .mg-cap b { font-size: var(--text-2xl); line-height: 1.25; }
 .mg-poster.big .mg-cap span:not(.st) { font-size: var(--text-md); }
 
-/* ---------- 수업 자료 표지 줄 ---------- */
-.mg-row { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-md) var(--space-sm); }
-.mg-cover { display: flex; flex-direction: column; gap: var(--space-3xs); min-width: 0; text-decoration: none; }
-.mg-cover img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-sm); border: var(--rule-thin) solid var(--color-hair); transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
-.mg-cover:hover img { transform: translateY(-3px); box-shadow: 0 10px 22px var(--color-lift); }
-.mg-cover b { margin-top: var(--space-3xs); font-size: var(--text-sm); line-height: 1.4; }
-.mg-cover:hover b { color: var(--color-accent); }
-.mg-cover small { font-size: var(--text-xs); color: var(--color-ink-2); }
+/* ---------- 수업 자료 표지: 흐르는 3D 카드 ---------- */
+.mg-flow {
+  --cw: 250px; --fx: 0.8;
+  position: relative; height: calc(var(--cw) * 1.25 + 104px); perspective: 1400px; overflow: hidden;
+  touch-action: pan-y; user-select: none; cursor: grab; border-radius: var(--radius-card);
+}
+.mg-flow.drag { cursor: grabbing; }
+.mg-flow:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.mg-fc {
+  position: absolute; top: 10px; left: 50%; width: var(--cw); margin-left: calc(var(--cw) / -2);
+  display: flex; flex-direction: column; gap: var(--space-2xs); text-decoration: none;
+  will-change: transform, opacity; backface-visibility: hidden; visibility: hidden;
+}
+.mg-fc img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-sm); border: var(--rule-thin) solid var(--color-hair); box-shadow: 0 16px 30px -16px var(--color-lift); -webkit-user-drag: none; pointer-events: none; }
+.mg-fc.on img { box-shadow: 0 22px 40px -18px var(--color-lift); }
+.mg-fct { display: flex; flex-direction: column; text-align: center; transition: opacity var(--dur-med) var(--ease-out); }
+.mg-fc:not(.on) .mg-fct { opacity: 0; }
+.mg-fct b { font-size: var(--text-sm); line-height: 1.4; }
+.mg-fct small { font-size: var(--text-xs); color: var(--color-ink-2); }
+.mg-fc.on:hover b { color: var(--color-accent); }
+.mg-fnav {
+  position: absolute; top: calc(var(--cw) * 0.625 + 10px); z-index: 1100; width: 40px; height: 40px; margin-top: -20px;
+  display: grid; place-items: center; border-radius: 50%; cursor: pointer;
+  border: var(--rule-thin) solid var(--color-rule); background: var(--color-paper); color: var(--color-ink);
+  box-shadow: 0 4px 14px -6px var(--color-lift);
+}
+.mg-fnav:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.mg-fnav.l { left: var(--space-2xs); }
+.mg-fnav.r { right: var(--space-2xs); }
+.mg-fnav.l .i { transform: rotate(-135deg); }
+.mg-fnav.r .i { transform: rotate(45deg); }
+.mg-fcount { position: absolute; right: var(--space-sm); bottom: var(--space-2xs); z-index: 1100; display: flex; align-items: center; gap: var(--space-2xs); font-size: var(--text-sm); color: var(--color-ink-2); font-variant-numeric: tabular-nums; }
+.mg-fcount b { color: var(--color-ink); }
+.mg-fplay { width: 28px; height: 28px; display: inline-grid; place-items: center; border-radius: var(--radius-sm); border: var(--rule-thin) solid var(--color-rule); background: var(--color-paper); color: var(--color-ink); font-size: 11px; cursor: pointer; }
+.mg-fplay:hover { border-color: var(--color-accent); color: var(--color-accent); }
 
 /* ---------- 지난 성과 사진 ---------- */
 .mg-work { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-sm); }
@@ -107,9 +134,6 @@ main { max-width: 1240px; }
 .res:has(.res-cover) h3 { font-size: var(--text-sm); }
 
 /* ---------- 반응형 ---------- */
-@media (max-width: 1080px) {
-  .mg-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-}
 @media (max-width: 860px) {
   .mg-hero { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mg-quad { grid-column: 1 / -1; }
@@ -117,12 +141,8 @@ main { max-width: 1240px; }
   .mg-two { grid-template-columns: minmax(0, 1fr); gap: 0; }
 }
 @media (max-width: 560px) {
-  .mg-row {
-    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 42%;
-    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
-    margin: 0 calc(-1 * var(--space-sm)); padding: 0 var(--space-sm) var(--space-2xs); scroll-padding: 0 var(--space-sm);
-  }
-  .mg-cover { scroll-snap-align: start; }
+  .mg-flow { --cw: min(200px, 54vw); --fx: 0.72; }
+  .mg-fnav { width: 34px; height: 34px; margin-top: -17px; }
   .mg-quad { gap: var(--space-2xs); }
   .mg-poster:not(.big) .mg-cap { padding: var(--space-2xs); }
   .mg-poster:not(.big) .mg-cap small, .mg-poster:not(.big) .mg-cap .st { display: none; }

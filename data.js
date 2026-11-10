@@ -45,7 +45,7 @@ window.SITE = {
 
   /* 자료실 필터 */
   grades: ["초 3~4", "초 5~6", "교사용"],
-  topics: ["개인정보", "사이버 예절", "디지털 과의존", "AI 윤리", "미디어 리터러시", "디지털 안전", "저작권", "디지털 기초"],
+  topics: ["개인정보", "사이버 예절", "디지털 과의존", "AI 윤리", "미디어 리터러시", "디지털 안전", "저작권", "디지털 기초", "웹앱"],
 
   /* 자료실 — links에 [이름, 주소] 묶음을 여러 개 넣을 수 있습니다 */
   resources: [
@@ -82,7 +82,20 @@ window.SITE = {
     { title: "교수학습과정안 모음 (3~4학년군)", grade: ["교사용", "초 3~4"], topic: "디지털 기초", type: "교수학습과정안",
       standard: "", links: [["과정안 내려받기", "https://zrr.kr/bdy2JY"]], cover: "img/res/r15.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
     { title: "교수학습과정안 모음 (5~6학년군)", grade: ["교사용", "초 5~6"], topic: "디지털 기초", type: "교수학습과정안",
-      standard: "", links: [["과정안 내려받기", "https://zrr.kr/ggCvd0"]], cover: "img/res/r16.jpg", source: "서산교육지원청 × 연구회", year: 2026 }
+      standard: "", links: [["과정안 내려받기", "https://zrr.kr/ggCvd0"]], cover: "img/res/r16.jpg", source: "서산교육지원청 × 연구회", year: 2026 },
+    /* 연구회원이 만들어 GitHub Pages에 배포한 웹앱 */
+    { title: "위임의 기술 — 6D로 살아남는 한 학기", grade: ["교사용"], topic: "AI 윤리", type: "웹앱",
+      standard: "", links: [["웹앱", "https://cosan75.github.io/ks6dai/"]], cover: "img/res/r17.jpg", source: "연구회원 제작 · GitHub Pages", year: 2026 },
+    { title: "소크라테스 포털 — 질문 수업 앱 7종", grade: ["교사용"], topic: "웹앱", type: "웹앱",
+      standard: "", links: [["웹앱", "https://cosan75.github.io/socratic-portal/"]], cover: "img/res/r18.jpg", source: "연구회원 제작 · GitHub Pages", year: 2026 },
+    { title: "KCBC 개념어 활동지 280개", grade: ["교사용"], topic: "웹앱", type: "웹앱",
+      standard: "", links: [["웹앱", "https://cosan75.github.io/kcbc-worksheets/"]], cover: "img/res/r19.jpg", source: "연구회원 제작 · GitHub Pages", year: 2026 },
+    { title: "KCBC 문해력 문항 DB", grade: ["교사용"], topic: "웹앱", type: "웹앱",
+      standard: "", links: [["웹앱", "https://cosan75.github.io/kcbc-corpus/"]], cover: "img/res/r20.jpg", source: "연구회원 제작 · GitHub Pages", year: 2026 },
+    { title: "학생맞춤통합지원 도구 모음 (논산·계룡)", grade: ["교사용"], topic: "웹앱", type: "웹앱",
+      standard: "", links: [["웹앱", "https://cosan75.github.io/hakma-nonsan/"]], cover: "img/res/r21.jpg", source: "연구회원 제작 · GitHub Pages", year: 2026 },
+    { title: "논산 다문화 학생 지원 연계표", grade: ["교사용"], topic: "웹앱", type: "웹앱",
+      standard: "", links: [["웹앱", "https://cosan75.github.io/nonsan-multicultural-support/"]], cover: "img/res/r22.jpg", source: "연구회원 제작 · GitHub Pages", year: 2026 }
   ],
 
   /* 프로젝트 — status: "진행 중" / "준비 중" / "완료". 맨 위가 홈에 크게 나옵니다 */
