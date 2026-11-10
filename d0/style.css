@@ -336,3 +336,5 @@ html,body{overflow-x:clip}
   .mg-fnav{width:34px;height:34px;margin-top:-17px}
   .lib-seg button{padding:8px 12px}
 }
+a.lib-view,a.lib-all{text-decoration:none}
+.home-lib{margin-bottom:18px}

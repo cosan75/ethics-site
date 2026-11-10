@@ -27,17 +27,6 @@
         '<div class="mg-quad">' + pr.slice(1, 5).map(function (p) { return poster(p, false); }).join("") + "</div></section>"
       : "";
 
-    var lessons = S.resources.filter(function (r) { return r.wide && r.type === "수업 PPT·학습지"; });
-    var covers = K.flowHTML(lessons, "수업 자료");
-
-    var apps = S.resources.filter(function (r) { return r.shot; });
-    var appGrid = '<div class="mg-apps">' + apps.map(function (r) {
-      var u = r.links && r.links[0] ? K.safeUrl(r.links[0][1]) : "";
-      return '<a class="mg-app" href="' + esc(u || "#/library") + '"' + (u ? K.ext(u) : "") + ">" +
-        '<img src="' + esc(B + r.shot) + '" alt="" loading="lazy" width="800" height="500">' +
-        "<b>" + esc(r.title) + "</b><small>" + esc(r.desc || "") + "</small></a>";
-    }).join("") + "</div>";
-
     var done = S.achievements.filter(function (a) { return a.img; });
     var work = '<div class="mg-work">' + done.map(function (a) {
       return '<a class="mg-photo" href="#/projects"><img src="' + esc(B + a.img) + '" alt="" loading="lazy">' +
@@ -62,10 +51,7 @@
     return (
       '<h1 class="vh">' + esc(S.site.name) + "</h1>" +
       hero +
-      '<section class="mg-sec">' + head("수업 자료", "#/library", "자료실 전체") +
-      '<p class="mg-lede">' + esc(S.site.slogan) + " · 가운데 카드를 누르면 수업 PPT가 열립니다</p>" + covers + "</section>" +
-      '<section class="mg-sec">' + head("연구회원이 만든 웹앱", "#/library", "자료실에서 보기") +
-      '<p class="mg-lede">GitHub Pages에 공개한 웹앱 ' + apps.length + "개 · 실제 화면 · 누르면 새 창에서 열립니다</p>" + appGrid + "</section>" +
+      '<section class="mg-sec">' + head("자료실", "#/library", "자료실 전체") + K.homeLibHTML() + "</section>" +
       '<section class="mg-sec">' + head("지난 성과", "#/projects", "프로젝트 전체") + work + "</section>" +
       '<div class="mg-two">' +
       '<section class="mg-sec">' + head("교사 인기 TOP 10", "#/learn/top") + rank + "</section>" +
@@ -74,8 +60,5 @@
     );
   };
 
-  /* 흐르는 카드 엔진은 공용 app.js(window.bindFlow) */
-  window.HOME_BIND = function (main) {
-    if (window.bindFlow) window.bindFlow(main.querySelector(".mg-flow"));
-  };
+  /* 첫 화면 자료 블록(탭·흐름)은 공용 app.js가 연결 */
 })();

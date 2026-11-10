@@ -191,8 +191,6 @@
 
   views[""] = function () {
     var cur = S.projects[0];
-    var res = S.resources.filter(function (r) { return r.type !== "참고 자료" && r.type !== "교수학습과정안"; });
-    var pick = [res[0], res[1], res[7], res[8]].filter(Boolean);
     var up = upcoming().slice(0, 2);
     return (
       '<section class="hero">' +
@@ -210,8 +208,7 @@
       "</section>" +
       '<div class="row"><h2 class="mk">연구회 사업 한눈에</h2><a class="more" href="#/projects">프로젝트 전체 →</a></div>' +
       '<div class="biz-strip">' + bizItems().map(bizCard).join("") + "</div>" +
-      '<div class="row"><h2 class="mk">바로 쓰는 수업 자료</h2><a class="more" href="#/library">자료실 전체 →</a></div>' +
-      '<div class="grid g4">' + pick.map(resCard).join("") + "</div>" +
+      '<div class="row"><h2 class="mk">자료실</h2><a class="more" href="#/library">자료실 전체 →</a></div>' + homeLibHTML() +
       '<div class="row"><h2 class="mk">교사들이 많이 찾은 자료 TOP 10</h2><a class="more" href="#/learn/top">순위 전체 →</a></div>' +
       '<div class="card top-teaser"><p class="muted" style="margin:0 0 8px;font-size:14px">교사 커뮤니티 도름스(dorms.school) 앱·자료 ' + S.dormsTop.total + "개 가운데 ‘도름(좋아요)’을 가장 많이 받은 순서 · " + esc(S.dormsTop.checked) + " 기준</p>" +
       rankList(S.dormsTop.items, 3) + "</div>" +
@@ -434,6 +431,37 @@
     drawLibBody();
   }
 
+  /* 첫 화면 자료 블록: 자료실과 같은 탭·흐름, 목록·전체 버튼은 자료실(목록)로 이동 */
+  function homeLibHTML() {
+    if (!lib.aud) lib.aud = "edu";
+    var segs = ["edu", "teacher"].map(function (k) {
+      var n = S.resources.filter(function (r) { return aud(r) === k; }).length;
+      return '<button type="button" data-aud="' + k + '" aria-pressed="' + (lib.aud === k) + '">' + AUD[k][0] + "<small>" + n + "</small></button>";
+    }).join("");
+    return '<div class="home-lib"><div class="lib-bar"><div class="lib-seg" role="group" aria-label="자료 구분">' + segs + "</div>" +
+      '<div class="lib-act"><a class="lib-view" href="#/library" aria-label="목록으로 보기" title="목록으로 보기">' + SVG_GRID + "</a>" +
+      '<a class="lib-all" href="#/library"></a></div></div><div class="hl-body"></div></div>';
+  }
+  function bindHomeLib(root) {
+    var box = root.querySelector(".home-lib");
+    if (!box) return;
+    function draw() {
+      var items = S.resources.filter(inAud);
+      box.querySelectorAll(".lib-seg button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.aud === lib.aud); });
+      box.querySelector(".lib-all").innerHTML = "전체 " + items.length + " " + SVG_ARROW;
+      box.querySelector(".hl-body").innerHTML = '<p class="lib-lede">' + AUD[lib.aud][1] + " · 가운데 카드를 누르면 열립니다 · 끌거나 ← → 로 넘기기</p>" +
+        flowHTML(items, AUD[lib.aud][0]);
+      bindFlow(box.querySelector(".mg-flow"));
+    }
+    box.querySelectorAll(".lib-seg button").forEach(function (b) {
+      b.addEventListener("click", function () { lib.aud = b.dataset.aud; saveLib(); draw(); });
+    });
+    box.querySelectorAll(".lib-view, .lib-all").forEach(function (a) {
+      a.addEventListener("click", function () { lib.view = "list"; saveLib(); });
+    });
+    draw();
+  }
+
   /* 프로젝트 */
   views["projects"] = function () {
     var years = {};
@@ -541,6 +569,7 @@
       else a.removeAttribute("aria-current");
     });
     if (page === "library") bindLibrary();
+    if (page === "") bindHomeLib(main);
     if (page === "learn") bindLearn();
     window.scrollTo(0, 0);
     if (route.started) main.focus({ preventScroll: true });

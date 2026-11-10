@@ -543,3 +543,5 @@ a.ibtn:hover { background: var(--color-ink); color: var(--color-paper); }
   .mg-fnav { width: 34px; height: 34px; margin-top: -17px; }
   .lib-seg button { padding: 8px 12px; }
 }
+a.lib-view, a.lib-all { text-decoration: none; }
+.home-lib { margin-bottom: var(--space-md); }

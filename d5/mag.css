@@ -65,14 +65,6 @@ main { max-width: 1240px; }
 .mg-poster.big .mg-cap b { font-size: var(--text-2xl); line-height: 1.25; }
 .mg-poster.big .mg-cap span:not(.st) { font-size: var(--text-md); }
 
-/* ---------- 연구회원이 만든 웹앱: 실제 화면 썸네일 ---------- */
-.mg-apps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-md) var(--space-sm); }
-.mg-app { display: flex; flex-direction: column; gap: var(--space-3xs); min-width: 0; text-decoration: none; color: var(--color-ink); }
-.mg-app img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: center top; border-radius: var(--radius-sm); border: var(--rule-thin) solid var(--color-rule); background: var(--color-paper); transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
-.mg-app:hover img { transform: translateY(-3px); box-shadow: 0 10px 22px var(--color-lift); }
-.mg-app b { margin-top: var(--space-3xs); font-size: var(--text-sm); line-height: 1.4; }
-.mg-app:hover b { color: var(--color-accent); }
-.mg-app small { font-size: var(--text-xs); line-height: 1.45; color: var(--color-ink-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 /* ---------- 지난 성과 사진 ---------- */
 .mg-work { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-sm); }
 .mg-photo { display: flex; flex-direction: column; gap: var(--space-2xs); min-width: 0; text-decoration: none; }
@@ -110,11 +102,9 @@ main { max-width: 1240px; }
   .mg-hero { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mg-quad { grid-column: 1 / -1; }
   .mg-work { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .mg-apps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .mg-two { grid-template-columns: minmax(0, 1fr); gap: 0; }
 }
 @media (max-width: 560px) {
-  .mg-apps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-sm) var(--space-xs); }
   .mg-quad { gap: var(--space-2xs); }
   .mg-poster:not(.big) .mg-cap { padding: var(--space-2xs); }
   .mg-poster:not(.big) .mg-cap small, .mg-poster:not(.big) .mg-cap .st { display: none; }

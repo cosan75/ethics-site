@@ -291,8 +291,6 @@
   /* 홈: 몬드리안 구성 */
   views[""] = function () {
     var cur = S.projects[0];
-    var res = S.resources.filter(function (r) { return r.type === "수업 PPT·학습지"; });
-    var pick = [res[0], res[1], res[7], res[8]].filter(Boolean);
     var up = upcoming();
     return (
       '<section class="mond" aria-label="바로가기">' +
@@ -314,8 +312,7 @@
 
       (cur ? sec("지금 하는 연구", "#/projects", "i-projects") + '<div class="now-proj">' + projectCard(cur) + "</div>" : "") +
 
-      sec("바로 쓰는 수업 자료", "#/library", "i-library") +
-      '<div class="grid g4">' + pick.map(resCard).join("") + "</div>" +
+      sec("자료실", "#/library", "i-library") + homeLibHTML() +
 
       '<div class="split">' +
       "<section>" + sec("교사 인기 TOP 3", "#/learn/top", "i-trophy") + rankList(S.dormsTop.items, 3) + "</section>" +
@@ -429,6 +426,37 @@
     drawLibBody();
   }
 
+  /* 첫 화면 자료 블록: 자료실과 같은 탭·흐름, 목록·전체 버튼은 자료실(목록)로 이동 */
+  function homeLibHTML() {
+    if (!lib.aud) lib.aud = "edu";
+    var segs = ["edu", "teacher"].map(function (k) {
+      var n = S.resources.filter(function (r) { return aud(r) === k; }).length;
+      return '<button type="button" data-aud="' + k + '" aria-pressed="' + (lib.aud === k) + '">' + AUD[k][0] + "<small>" + n + "</small></button>";
+    }).join("");
+    return '<div class="home-lib"><div class="lib-bar"><div class="lib-seg" role="group" aria-label="자료 구분">' + segs + "</div>" +
+      '<div class="lib-act"><a class="lib-view" href="#/library" aria-label="목록으로 보기" title="목록으로 보기">' + SVG_GRID + "</a>" +
+      '<a class="lib-all" href="#/library"></a></div></div><div class="hl-body"></div></div>';
+  }
+  function bindHomeLib(root) {
+    var box = root.querySelector(".home-lib");
+    if (!box) return;
+    function draw() {
+      var items = S.resources.filter(inAud);
+      box.querySelectorAll(".lib-seg button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.aud === lib.aud); });
+      box.querySelector(".lib-all").innerHTML = "전체 " + items.length + " " + SVG_ARROW;
+      box.querySelector(".hl-body").innerHTML = '<p class="lib-lede">' + AUD[lib.aud][1] + " · 가운데 카드를 누르면 열립니다 · 끌거나 ← → 로 넘기기</p>" +
+        flowHTML(items, AUD[lib.aud][0]);
+      bindFlow(box.querySelector(".mg-flow"));
+    }
+    box.querySelectorAll(".lib-seg button").forEach(function (b) {
+      b.addEventListener("click", function () { lib.aud = b.dataset.aud; saveLib(); draw(); });
+    });
+    box.querySelectorAll(".lib-view, .lib-all").forEach(function (a) {
+      a.addEventListener("click", function () { lib.view = "list"; saveLib(); });
+    });
+    draw();
+  }
+
   /* 프로젝트 */
   views["projects"] = function () {
     var withImg = S.achievements.filter(function (a) { return a.img; });
@@ -535,7 +563,7 @@
 
   /* 다른 디자인(포털 등)이 홈 화면을 바꿀 수 있게 */
   if (typeof window.HOME_VIEW === "function") {
-    var kit = { S: S, B: B, esc: esc, ic: ic, topic: topic, safeUrl: safeUrl, ext: ext, resCard: resCard, flowHTML: flowHTML, bindFlow: bindFlow, rankList: rankList,
+    var kit = { S: S, B: B, esc: esc, ic: ic, topic: topic, safeUrl: safeUrl, ext: ext, resCard: resCard, flowHTML: flowHTML, bindFlow: bindFlow, homeLibHTML: homeLibHTML, rankList: rankList,
       list: list, ddayCard: ddayCard, upcoming: upcoming, projectCard: projectCard, status: status, linkIcon: linkIcon, linkShort: linkShort };
     views[""] = function () { return window.HOME_VIEW(kit); };
   }
@@ -554,6 +582,7 @@
     if (page === "library") bindLibrary();
     if (page === "learn") bindLearn();
     if (page === "" && typeof window.HOME_BIND === "function") window.HOME_BIND(main);
+    if (page === "") bindHomeLib(main);
     window.scrollTo(0, 0);
     if (route.started) main.focus({ preventScroll: true });
     route.started = true;
