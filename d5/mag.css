@@ -76,7 +76,7 @@ main { max-width: 1240px; }
 /* ---------- 지난 성과 사진 ---------- */
 .mg-work { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-sm); }
 .mg-photo { display: flex; flex-direction: column; gap: var(--space-2xs); min-width: 0; text-decoration: none; }
-.mg-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-card); border: var(--rule-thin) solid var(--color-hair); }
+.mg-photo img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: contain; background: var(--color-paper-2); border-radius: var(--radius-card); border: var(--rule-thin) solid var(--color-hair); }
 .mg-photo span { display: flex; flex-direction: column; }
 .mg-photo small { color: var(--color-accent); font-weight: 700; font-size: var(--text-xs); }
 .mg-photo b { font-size: var(--text-sm); line-height: 1.4; }
