@@ -1,4 +1,4 @@
-/* 디자인 4 · 포털형 홈: 큰 검색 → 동그라미 바로가기 → 본문(목록) + 오른쪽 위젯 */
+/* 디자인 4 · 포털형 홈: 동그라미 바로가기 → 자료실(교육자료/교사자료 탭 + 흐르는 카드, 전체 폭) → 본문 + 오른쪽 위젯 */
 (function () {
   "use strict";
   var K;
@@ -6,28 +6,6 @@
   function box(title, href, ico, inner, extra) {
     return '<section class="pt-box' + (extra ? " " + extra : "") + '"><div class="pt-head"><h2>' + K.ic(ico, "sm") + K.esc(title) + "</h2>" +
       (href ? '<a class="pt-more" href="' + href + '">더보기' + K.ic("i-out", "sm") + "</a>" : "") + "</div>" + inner + "</section>";
-  }
-
-  function resRow(r) {
-    var t = K.topic(r.topic), esc = K.esc;
-    var first = r.links && r.links[0] ? K.safeUrl(r.links[0][1]) : "";
-    var links = (r.links || []).map(function (l) {
-      var u = K.safeUrl(l[1]);
-      return u ? '<a class="pt-lk" href="' + esc(u) + '"' + K.ext(u) + ' title="' + esc(l[0]) + '">' + K.ic(K.linkIcon(l[0]), "sm") + "<span>" + esc(K.linkShort(l[0])) + "</span></a>" : "";
-    }).join("");
-    return '<li><span class="pt-ico" data-c="' + t[1] + '" title="' + esc(r.topic) + '">' + K.ic(t[0], "sm") + "</span>" +
-      '<a class="pt-title" href="' + esc(first || "#/library") + '"' + (first ? K.ext(first) : "") + ">" + esc(r.title) + "</a>" +
-      '<span class="pt-grade">' + esc(r.grade.join(" · ")) + "</span>" +
-      '<span class="pt-lks">' + links + "</span></li>";
-  }
-
-  var curTopic = "전체";
-  function rows() {
-    var S = K.S;
-    var arr = S.resources.filter(function (r) {
-      return curTopic === "전체" ? r.type === "수업 PPT·학습지" : r.topic === curTopic;
-    });
-    return arr.slice(0, 6).map(resRow).join("") || '<li class="pt-none">이 주제의 자료가 아직 없습니다.</li>';
   }
 
   window.HOME_VIEW = function (kit) {
@@ -40,14 +18,6 @@
       ["#/learn/top", "i-trophy", "TOP 10", "y"], ["#/notice", "i-notice", "공지", "r"],
       ["#/learn/links", "i-link", "꿀 링크", "b"], ["#/about", "i-about", "소개", "g"]
     ];
-    var used = [];
-    S.resources.forEach(function (r) { if (used.indexOf(r.topic) < 0) used.push(r.topic); });
-    var topics = ["전체"].concat(used);
-
-    var tabs = '<div class="pt-tabs" role="tablist" aria-label="주제">' + topics.map(function (t) {
-      return '<button type="button" role="tab" data-topic="' + esc(t) + '" aria-selected="' + (t === curTopic) + '">' + esc(t) + "</button>";
-    }).join("") + "</div>";
-
     var news = '<ul class="pt-news">' + S.projects.slice(0, 4).map(function (p) {
       var t = K.topic(p.topic);
       return '<li><a href="#/projects">' +
@@ -85,8 +55,8 @@
       '<nav class="pt-short" aria-label="바로가기">' + shortcuts.map(function (s) {
         return '<a href="' + s[0] + '"><span class="pt-circ" data-c="' + s[3] + '">' + ic(s[1]) + "</span><span>" + s[2] + "</span></a>";
       }).join("") + "</nav>" +
+      box("자료실", "#/library", "i-library", K.homeLibHTML(), "pt-wide") +
       '<div class="pt-body"><div class="pt-main">' +
-      box("오늘의 수업 자료", "#/library", "i-library", tabs + '<ul class="pt-res" id="ptres">' + rows() + "</ul>") +
       box("연구회 소식", "#/projects", "i-projects", news) +
       box("교사 인기 TOP 10", "#/learn/top", "i-trophy", rank) +
       '</div><aside class="pt-side" aria-label="연구회 안내">' + info +
@@ -97,13 +67,5 @@
     );
   };
 
-  window.HOME_BIND = function (main) {
-    main.querySelectorAll("[data-topic]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        curTopic = b.dataset.topic;
-        main.querySelectorAll("[data-topic]").forEach(function (x) { x.setAttribute("aria-selected", x === b); });
-        document.getElementById("ptres").innerHTML = rows();
-      });
-    });
-  };
+  /* 자료실 블록(탭·흐름)은 공용 app.js가 연결 */
 })();

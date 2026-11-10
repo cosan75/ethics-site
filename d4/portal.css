@@ -166,4 +166,5 @@ main { max-width: 1140px; }
   .pt-short a { font-size: var(--text-xs); }
   .pt-lk span { display: none; }
 }
-
+.pt-box.pt-wide { margin-bottom: var(--space-md); }
+.pt-wide .home-lib { margin-bottom: 0; }
