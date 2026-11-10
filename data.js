@@ -16,6 +16,8 @@ window.SITE = {
     membersNote: "2026. 3. 기준",
     /* 가입 신청 폼 주소가 생기면 아래 joinUrl에 넣으세요. 비어 있으면 버튼 대신 안내문만 나옵니다. */
     joinUrl: "",
+    /* 가입 QR코드가 들어 있는 모집 안내 포스터 (소개 › 함께하기, 디자인 5 첫 화면) */
+    joinPoster: "img/join-poster.png",
     joinText: "상시 모집 중입니다. 연구회 모집 안내문의 QR코드로 신청하거나 가까운 연구회원에게 문의해 주세요."
   },
 

@@ -286,3 +286,5 @@ html,body{overflow-x:clip}
 .sns-ico svg{width:18px;height:18px}
 .sns.ig .sns-ico{background:#d6246e}.sns.yt .sns-ico{background:#e5202b}
 @media (max-width:560px){.top .sns-h{display:none}}
+
+.join-poster{display:block;width:min(240px,100%);margin-top:12px;border:1px solid var(--line);border-radius:10px;overflow:hidden}.join-poster img{display:block;width:100%;height:auto}

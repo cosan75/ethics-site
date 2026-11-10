@@ -462,3 +462,8 @@ a.ibtn:hover { background: var(--color-ink); color: var(--color-paper); }
 .sns.yt .sns-ico { background: var(--color-youtube); }
 .sns-ico .i { width: 18px; height: 18px; }
 @media (max-width: 560px) { .tools .sns-h { display: none; } }
+
+/* 함께하기: 가입 QR 포스터 */
+.join-poster { flex: none; width: 220px; margin-left: auto; display: block; border-radius: var(--radius-sm, 8px); overflow: hidden; border: var(--rule-thin) solid var(--color-rule); background: var(--color-paper); }
+.join-poster img { display: block; width: 100%; height: auto; }
+@media (max-width: 720px) { .join-poster { width: min(280px, 100%); margin-left: 0; } }

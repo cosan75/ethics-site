@@ -179,7 +179,9 @@
   function joinBlock() {
     var u = safeUrl(S.site.joinUrl);
     return '<p style="margin:0">' + esc(S.site.joinText) + "</p>" +
-      (u ? '<a class="btn primary" style="align-self:flex-start;margin-top:10px" href="' + esc(u) + '"' + ext(u) + ">가입 신청하기</a>" : "");
+      (u ? '<a class="btn primary" style="align-self:flex-start;margin-top:10px" href="' + esc(u) + '"' + ext(u) + ">가입 신청하기</a>" : "") +
+      (S.site.joinPoster ? '<a class="join-poster" href="../' + esc(S.site.joinPoster) + '" target="_blank" rel="noopener" title="연구회 가입 QR코드 크게 보기">' +
+        '<img src="../' + esc(S.site.joinPoster) + '" alt="연구회원 모집 안내 · 연구회 가입 QR코드" width="430" height="602" loading="lazy"></a>' : "");
   }
 
   /* ---------- 화면 ---------- */

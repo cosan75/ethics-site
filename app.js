@@ -349,7 +349,10 @@
       '<p class="fine">' + ic("i-lock", "sm") + "운영진 이름·연락처는 개인정보 보호를 위해 싣지 않습니다</p>" +
       '<section class="join" data-c="b">' + ic("i-join", "lg") +
       "<div><h2>함께하기</h2><p>" + esc(S.site.eligibility) + "</p><p>" + esc(S.site.joinText) + "</p>" +
-      (u ? '<a class="btn on-b" href="' + esc(u) + '"' + ext(u) + ">가입 신청</a>" : "") + "</div></section>"
+      (u ? '<a class="btn on-b" href="' + esc(u) + '"' + ext(u) + ">가입 신청</a>" : "") + "</div>" +
+      (S.site.joinPoster ? '<a class="join-poster" href="' + esc(B + S.site.joinPoster) + '" target="_blank" rel="noopener" title="연구회 가입 QR코드 크게 보기">' +
+        '<img src="' + esc(B + S.site.joinPoster) + '" alt="연구회원 모집 안내 · 연구회 가입 QR코드" width="430" height="602" loading="lazy"></a>' : "") +
+      "</section>"
     );
   };
 
