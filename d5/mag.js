@@ -22,6 +22,8 @@
     var pr = S.projects.filter(function (p) { return p.img; });
     var hero = pr.length
       ? '<section class="mg-hero" aria-label="연구회 프로젝트">' + poster(pr[0], true) +
+        '<a class="mg-join" href="' + B + 'img/join-poster.png" target="_blank" rel="noopener" title="연구회 가입 QR코드 크게 보기">' +
+        '<img src="' + B + 'img/join-poster.png" alt="디지털윤리교육연구회 연구회원 모집 안내 · 연구회 가입 QR코드" width="430" height="602"></a>' +
         '<div class="mg-quad">' + pr.slice(1, 5).map(function (p) { return poster(p, false); }).join("") + "</div></section>"
       : "";
 
