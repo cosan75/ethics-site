@@ -166,3 +166,18 @@ main { max-width: 1140px; }
   .pt-short a { font-size: var(--text-xs); }
   .pt-lk span { display: none; }
 }
+
+/* ---------- 머리 로고: 연구회 공식 로고 ---------- */
+.logo .logo-full { width: auto; height: 44px; }
+.logo .logo-mark, .logo .logo-full.dk { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .logo .logo-full.lt { display: none; }
+  :root:not([data-theme="light"]) .logo .logo-full.dk { display: block; }
+}
+:root[data-theme="dark"] .logo .logo-full.lt { display: none; }
+:root[data-theme="dark"] .logo .logo-full.dk { display: block; }
+@media (max-width: 1080px) { .logo .logo-full { height: 36px; } }
+@media (max-width: 720px) {
+  .logo .logo-full { display: none !important; }
+  .logo .logo-mark { display: block; }
+}
