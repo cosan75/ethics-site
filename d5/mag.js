@@ -27,18 +27,29 @@
         '<div class="mg-quad">' + pr.slice(1, 5).map(function (p) { return poster(p, false); }).join("") + "</div></section>"
       : "";
 
-    var lessons = S.resources.filter(function (r) { return r.cover && r.type === "수업 PPT·학습지"; });
-    var covers = '<div class="mg-flow" tabindex="0" role="region" aria-roledescription="carousel" aria-label="수업 자료 표지 (← → 키로 넘기기)">' +
+    var lessons = S.resources.filter(function (r) { return r.wide && r.type === "수업 PPT·학습지"; });
+    var covers = '<div class="mg-flow" tabindex="0" role="region" aria-roledescription="carousel" aria-label="수업 자료 (← → 키로 넘기기)">' +
       lessons.map(function (r) {
         var u = r.links && r.links[0] ? K.safeUrl(r.links[0][1]) : "";
         return '<a class="mg-fc" href="' + esc(u || "#/library") + '"' + (u ? K.ext(u) : "") + ' draggable="false">' +
-          '<img src="' + esc(B + r.cover) + '" alt="" width="640" height="800" draggable="false">' +
-          '<span class="mg-fct"><b>' + esc(r.title) + "</b><small>" + esc(r.grade.join(" · ")) + " · " + esc(r.topic) + "</small></span></a>";
+          '<img src="' + esc(B + r.wide) + '" alt="" width="800" height="500" draggable="false">' +
+          '<span class="mg-fb"><span class="mg-fbadge">' + esc(r.topic) + "</span>" +
+          '<b class="mg-ft">' + esc(r.title) + "</b>" +
+          '<span class="mg-fp">' + esc(r.grade.join(" · ")) + (r.standard ? " · 성취기준 " + esc(r.standard) : "") + " · 수업 PPT와 학습지를 함께 받아 바로 쓰는 자료</span>" +
+          '<span class="mg-ff"><span>' + esc(r.source || "") + "</span><span>" + (r.links.length > 1 ? "PPT·학습지 열기 ↗" : "열기 ↗") + "</span></span></span></a>";
       }).join("") +
       '<button type="button" class="mg-fnav l" aria-label="이전 자료">' + ic("i-out", "sm") + "</button>" +
       '<button type="button" class="mg-fnav r" aria-label="다음 자료">' + ic("i-out", "sm") + "</button>" +
       '<div class="mg-fcount"><span aria-live="polite"></span><button type="button" class="mg-fplay"></button></div>' +
       "</div>";
+
+    var apps = S.resources.filter(function (r) { return r.shot; });
+    var appGrid = '<div class="mg-apps">' + apps.map(function (r) {
+      var u = r.links && r.links[0] ? K.safeUrl(r.links[0][1]) : "";
+      return '<a class="mg-app" href="' + esc(u || "#/library") + '"' + (u ? K.ext(u) : "") + ">" +
+        '<img src="' + esc(B + r.shot) + '" alt="" loading="lazy" width="800" height="500">' +
+        "<b>" + esc(r.title) + "</b><small>" + esc(r.desc || "") + "</small></a>";
+    }).join("") + "</div>";
 
     var done = S.achievements.filter(function (a) { return a.img; });
     var work = '<div class="mg-work">' + done.map(function (a) {
@@ -65,7 +76,9 @@
       '<h1 class="vh">' + esc(S.site.name) + "</h1>" +
       hero +
       '<section class="mg-sec">' + head("수업 자료", "#/library", "자료실 전체") +
-      '<p class="mg-lede">' + esc(S.site.slogan) + " · 표지를 누르면 수업 PPT가 열립니다</p>" + covers + "</section>" +
+      '<p class="mg-lede">' + esc(S.site.slogan) + " · 가운데 카드를 누르면 수업 PPT가 열립니다</p>" + covers + "</section>" +
+      '<section class="mg-sec">' + head("연구회원이 만든 웹앱", "#/library", "자료실에서 보기") +
+      '<p class="mg-lede">GitHub Pages에 공개한 웹앱 ' + apps.length + "개 · 실제 화면 · 누르면 새 창에서 열립니다</p>" + appGrid + "</section>" +
       '<section class="mg-sec">' + head("지난 성과", "#/projects", "프로젝트 전체") + work + "</section>" +
       '<div class="mg-two">' +
       '<section class="mg-sec">' + head("교사 인기 TOP 10", "#/learn/top") + rank + "</section>" +

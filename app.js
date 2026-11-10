@@ -64,6 +64,14 @@
   }
 
   /* 자료 카드: 주제 색 띠 · 주제 아이콘 · 제목 · 학년 · 아이콘 버튼 */
+  /* 웹앱 썸네일: 실제 화면 캡처(800×500, 16:10) — 누르면 앱이 열림 */
+  function shot(r) {
+    if (!r.shot) return "";
+    var u = r.links && r.links[0] ? safeUrl(r.links[0][1]) : "";
+    var img = '<img src="' + esc(B + r.shot) + '" alt="' + esc(r.title) + ' 화면" loading="lazy" width="800" height="500">';
+    return u ? '<a class="res-shot" href="' + esc(u) + '"' + ext(u) + ' tabindex="-1">' + img + "</a>" : '<span class="res-shot">' + img + "</span>";
+  }
+
   function resCard(r) {
     var t = topic(r.topic);
     var btns = (r.links || []).map(function (l) {
@@ -73,11 +81,13 @@
         : '<span class="ibtn off">' + ic(linkIcon(l[0])) + "<span>준비 중</span></span>";
     }).join("");
     return (
-      '<article class="res" data-c="' + t[1] + '">' +
+      '<article class="res' + (r.shot ? " has-shot" : "") + '" data-c="' + t[1] + '">' +
+      shot(r) +
       (r.cover ? '<img class="res-cover" src="' + esc(B + r.cover) + '" alt="" loading="lazy" width="640" height="800">' : "") +
       '<div class="res-top"><span class="res-ico" title="' + esc(r.topic) + '">' + ic(t[0]) + "</span>" +
       '<span class="res-topic">' + esc(r.topic) + "</span></div>" +
       "<h3>" + esc(r.title) + "</h3>" +
+      (r.desc ? '<p class="res-desc">' + esc(r.desc) + "</p>" : "") +
       '<div class="chips">' + r.grade.map(function (g) { return '<span class="chip">' + esc(g) + "</span>"; }).join("") +
       (r.standard ? '<span class="chip ghost" title="관련 성취기준">' + esc(r.standard) + "</span>" : "") + "</div>" +
       '<div class="ibtns">' + btns + "</div>" +

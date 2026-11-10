@@ -131,8 +131,10 @@
     }).join("");
     return (
       '<article class="card res">' +
+      (r.shot ? (function () { var u = r.links && r.links[0] ? safeUrl(r.links[0][1]) : ""; var im = '<img src="../' + esc(r.shot) + '" alt="' + esc(r.title) + ' 화면" loading="lazy" width="800" height="500">'; return u ? '<a class="res-shot" href="' + esc(u) + '"' + ext(u) + ' tabindex="-1">' + im + "</a>" : '<span class="res-shot">' + im + "</span>"; })() : "") +
       '<span class="res-type">' + esc(r.type) + (r.standard ? ' · <span title="관련 성취기준">' + esc(r.standard) + "</span>" : "") + "</span>" +
       "<h3>" + esc(r.title) + "</h3>" +
+      (r.desc ? '<p class="res-desc">' + esc(r.desc) + "</p>" : "") +
       '<div class="meta"><span class="tag topic">' + esc(r.topic) + "</span>" +
       r.grade.map(function (g) { return '<span class="tag">' + esc(g) + "</span>"; }).join("") + "</div>" +
       '<div class="lbtns">' + btns + "</div>" +

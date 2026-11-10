@@ -288,3 +288,8 @@ html,body{overflow-x:clip}
 @media (max-width:560px){.top .sns-h{display:none}}
 
 .join-poster{display:block;width:min(240px,100%);margin-top:12px;border:1px solid var(--line);border-radius:10px;overflow:hidden}.join-poster img{display:block;width:100%;height:auto}
+
+/* 웹앱 썸네일 */
+.res-shot{display:block;aspect-ratio:16/10;overflow:hidden;border-radius:10px;border:1px solid rgba(0,0,0,.08);margin-bottom:6px}
+.res-shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+.res-desc{margin:0;font-size:14px;line-height:1.5;opacity:.75}

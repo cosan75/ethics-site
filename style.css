@@ -449,6 +449,11 @@ a.ibtn:hover { background: var(--color-ink); color: var(--color-paper); }
 
 /* 수업 자료 표지: 디자인 5에서만 보임 */
 .res-cover{display:none}
+/* 웹앱 썸네일(모든 디자인) */
+.res-shot { display: block; margin: 0 calc(-1 * var(--space-sm)); aspect-ratio: 16 / 10; overflow: hidden; border-bottom: var(--rule-thin) solid var(--color-rule); background: var(--color-paper); }
+.res-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform var(--dur-short) var(--ease-out); }
+.res-shot:hover img { transform: scale(1.03); }
+.res-desc { margin: 0; font-size: var(--text-sm); line-height: 1.5; color: var(--color-ink-2); }
 
 /* 소식 채널: 인스타그램 · 유튜브 */
 .sns-h.ig { color: var(--color-insta); }
